@@ -107,7 +107,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ::AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, false);
 
    /* (등록한 클래스 이름, 창 타이틀, 윈도우 스타일[타이틀 + 최소/최대/닫기 버튼], 위치 자동설정, 너비, 높이, 부모 창, 메뉴, 인스턴스 핸들, 추가파라미터) */
-   hWnd = CreateWindowW(L"GameGraphics", L"Client", WS_OVERLAPPEDWINDOW,
+   hWnd = CreateWindowW(L"GameGraphics", L"Minguri Clinet", WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
