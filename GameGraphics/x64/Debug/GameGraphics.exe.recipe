@@ -5,7 +5,11 @@
       <FullPath>C:\Users\user\Desktop\GameGraphics\x64\Debug\GameGraphics.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
-  <ContentFiles />
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\user\Desktop\GameGraphics\x64\Debug\DefaultVertexShader.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
   <SatelliteDlls />
   <NonRecipeFileRefs />
 </Project>

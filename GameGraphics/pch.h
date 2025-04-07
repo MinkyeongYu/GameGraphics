@@ -6,6 +6,8 @@
 #include "Values.h"
 #include "Struct.h"
 
+#include <string>
+
 /* STL */
 #include <unordered_map>
 #include <vector>
