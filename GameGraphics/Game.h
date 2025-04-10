@@ -33,6 +33,20 @@ private:
 	void CreateVertexShader();
 	void CreatePixelShader();
 
+	/* RasterizerState 생성
+	   - 삼각형을 화면에 어떻게 그릴지 설정 (채우기 모드, 컬링, 앞면 방향 등) */
+	void CreateRasterizerState();
+
+	/* Sampler State 생성
+	   - 픽셀 셰이더에서 텍스처 좌표(UV)를 어떻게 샘플링할지 설정
+		 (보간 방식, 경계 처리 방식 등) */
+	void CreateSamplerState();
+
+	/* Blend State 생성
+	   - 픽셀이 렌더 타겟에 출력될 때, 기존 픽셀과 새 픽셀을 어떻게 섞을지 설정
+		 (투명도, 알파 블렌딩 등 처리 방식) */
+	void CreateBlendState();
+
 	/* Shader Resource View 생성 */
 	void CreateShaderResourceView();
 
@@ -88,6 +102,9 @@ private:
 	// 정점 셰이더의 바이트 코드 (InputLayout 생성에도 사용)
 	ComPtr<ID3DBlob> _vertexBlob = nullptr;
 
+	/* Rasterizer State */
+	ComPtr<ID3D11RasterizerState> _rasterizerState = nullptr;
+
 	/* Pixel Shader */
 	// 픽셀 셰이더 객체 (GPU에서 픽셀 색상 처리)
 	ComPtr<ID3D11PixelShader> _pixelShader = nullptr;
@@ -98,6 +115,14 @@ private:
 		: 셰이더(Shader)가 GPU 리소스(텍스처, 버퍼 등)에 접근할 수 있도록 만들어주는 객체 */
 	ComPtr<ID3D11ShaderResourceView> _shaderResourceView = nullptr;
 
+	/* Sampler State 객체
+   - 텍스처 샘플링 시 보간 방식(Filter), 경계 처리(AddressMode) 등을 정의한 상태 객체
+   - 픽셀 셰이더에서 텍스처 좌표(UV)를 어떻게 해석할지 GPU에게 알려줌 */
+	ComPtr<ID3D11SamplerState> _samplerState = nullptr;
+
+	/*	Blend State 객체 
+		: 픽셀 색상 혼합 방식 설정: 알파 블렌딩 등 */
+	ComPtr<ID3D11BlendState> _blendState = nullptr;
 private:
 	/* Constant Buffer */
 	TransformData _transformData;
