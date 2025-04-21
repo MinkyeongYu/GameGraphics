@@ -18,7 +18,9 @@ struct	VS_OUTPUT
 
 cbuffer TransformData : register(b0)
 {
-	float4 offset;
+	row_major matrix worldMatrix;
+	row_major matrix viewMatrix;
+	row_major matrix projectionMatrix;
 }
 
 // IA - VS - RS(VS_main에서 자동 처리) - PS - OM
@@ -26,7 +28,13 @@ cbuffer TransformData : register(b0)
 VS_OUTPUT VS_main(VS_INPUT input)
 {
 	VS_OUTPUT output;
-	output.position = input.position + offset;
+	
+	// World, View, Projection Matrix
+	float4 position = mul(input.position, worldMatrix);
+	position = mul(position, viewMatrix);
+	position = mul(position, projectionMatrix);
+
+	output.position = position;
 	output.uv = input.uv;
 
 	return output;
