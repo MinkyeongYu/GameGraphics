@@ -24,6 +24,30 @@
     <Filter Include="소스 파일\99. Headers\Utils">
       <UniqueIdentifier>{44f30fdd-090d-44e8-88f7-a58d406597ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\00.Engine">
+      <UniqueIdentifier>{f79af860-3689-43dc-95b6-5df43dc84533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00.Engine\Pipeline">
+      <UniqueIdentifier>{883e9408-0085-4d52-b674-e27c44207081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00.Engine\Pipeline\00.Geometry">
+      <UniqueIdentifier>{33b69eca-d5bf-4b25-8791-a857f3230cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00.Engine\Pipeline\01.InputAssembler">
+      <UniqueIdentifier>{477419dd-876a-4bbd-9d4e-17b79150f12a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00.Engine\Pipeline\02.VertexShader">
+      <UniqueIdentifier>{8f5ff2f4-11db-47c7-a0d2-7b22cbf0d14a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00.Engine\Pipeline\03.Rasterizer">
+      <UniqueIdentifier>{4470934d-d447-47e1-b06f-6c4f7c154761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00.Engine\Pipeline\04.PixelShader">
+      <UniqueIdentifier>{5fdf2ed7-1ec9-47a8-96cd-ee02146d5e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00.Engine\Pipeline\05.OutputMerger">
+      <UniqueIdentifier>{3aa7f2b5-6d83-4c48-bb70-d0d05b74cb08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameGraphics.h">
@@ -56,6 +80,9 @@
     <ClInclude Include="SimpleMath.h">
       <Filter>소스 파일\99. Headers\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>소스 파일\00.Engine\Pipeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameGraphics.rc">
@@ -82,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="SimpleMath.cpp">
       <Filter>소스 파일\99. Headers\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>소스 파일\00.Engine\Pipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

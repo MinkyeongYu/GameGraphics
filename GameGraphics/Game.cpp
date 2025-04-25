@@ -12,12 +12,13 @@ Game::~Game()
 void Game::Init(HWND hwnd)
 {
 	_hwnd = hwnd;
-	_width = GWinSizeX;
-	_height = GWinSizeY;
 
-	CreateDeviceAndSwapChain();     // [1] DirectX 핵심 객체들 생성
-	CreateRenderTargetView();       // [2] 백버퍼 기반의 렌더 타겟 뷰 생성
-	SetViewport();                  // [3] 화면에 출력할 뷰포트 크기 설정
+	// [1] DirectX 핵심 객체들 생성
+	// [2] 백버퍼 기반의 렌더 타겟 뷰 생성
+	// [3] 화면에 출력할 뷰포트 크기 설정
+	//_graphics = make_shared<Graphics>(hwnd);
+	_graphics = new Graphics(hwnd);
+
 
 	CreateGeometry();               // [4] 정점 데이터 정의 및 GPU 버퍼에 업로드, vertexBuffer 생성
 	CreateVertexShader();           // [5] 정점 셰이더 컴파일 및 생성
@@ -50,7 +51,7 @@ void Game::Update()
 	ZeroMemory(&subResource, sizeof(subResource));
 
 	// GPU의 Constant Buffer를 CPU에서 쓰기 위한 접근 요청
-	_deviceContext->Map(
+	_graphics->GetDeviceContext()->Map(
 		_constantBuffer.Get(),			// 업데이트할 Constant Buffer
 		0,								// 서브리소스 인덱스 (일반적으로 0)
 		D3D11_MAP_WRITE_DISCARD,		// 이전 내용은 버리고 새로 쓰기 (가장 일반적인 방식)
@@ -60,13 +61,13 @@ void Game::Update()
 	// _transformData값을 GPU메모리로 복사한 후, GPU의 Constant Buffer에 업로드
 	::memcpy(subResource.pData, &_transformData, sizeof(_transformData));
 	// 맵핑 해제 → GPU에서 읽을 수 있도록 다시 연결
-	_deviceContext->Unmap(_constantBuffer.Get(), 0);
+	_graphics->GetDeviceContext()->Unmap(_constantBuffer.Get(), 0);
 }
 
 void Game::Render()
 {
 	/* 랜더링 시작 */
-	RenderBegin();
+	_graphics->RenderBegin();
 
 	/* IA - VS - RS - PS - OM */
 	{
@@ -75,134 +76,35 @@ void Game::Render()
 		uint32 offset = 0;								// 버퍼의 시작 위치 오프셋
 
 		/* GPU에게 정점 버퍼의 크기와 위치(stride, offset) 전달, vertices 사용함을 GPU에 알려줌 */
-		_deviceContext->IASetVertexBuffers(0, 1, _vertexBuffer.GetAddressOf(), &stride, &offset);
+		_graphics->GetDeviceContext()->IASetVertexBuffers(0, 1, _vertexBuffer.GetAddressOf(), &stride, &offset);
 		/* 32-bit(4Byte) uint 인덱스 버퍼 GPU에 바인딩 */
-		_deviceContext->IASetIndexBuffer(_indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+		_graphics->GetDeviceContext()->IASetIndexBuffer(_indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 		/* GPU에게 정점 데이터의 구조 전달 */
-		_deviceContext->IASetInputLayout(_inputLayout.Get());
+		_graphics->GetDeviceContext()->IASetInputLayout(_inputLayout.Get());
 		/* 각 정점을 어떻게 이어줄지 전달, 삼각형으로 이어주도록 설정 */
-		_deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		_graphics->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		// VS (Vertex Shader) : 정점의 위치/색상 등 가공
-		_deviceContext->VSSetShader(_vertexShader.Get(), nullptr, 0);
-		_deviceContext->VSSetConstantBuffers(0, 1, _constantBuffer.GetAddressOf());
+		_graphics->GetDeviceContext()->VSSetShader(_vertexShader.Get(), nullptr, 0);
+		_graphics->GetDeviceContext()->VSSetConstantBuffers(0, 1, _constantBuffer.GetAddressOf());
 
 		// RS (Rasterizer) : 정점 → 픽셀로 삼각형 그리기
 		/* Draw()호출 시 내부적으로 GPU가 자동으로 Rasterizer 실행함 */
-		_deviceContext->RSSetState(_rasterizerState.Get());
+		_graphics->GetDeviceContext()->RSSetState(_rasterizerState.Get());
 
 		// PS (Pixel Shader) : 픽셀 단위 색상 처리
-		_deviceContext->PSSetShader(_pixelShader.Get(), nullptr, 0);
-		_deviceContext->PSSetShaderResources(0, 1, _shaderResourceView.GetAddressOf());
-		_deviceContext->PSSetSamplers(0, 1, _samplerState.GetAddressOf());
+		_graphics->GetDeviceContext()->PSSetShader(_pixelShader.Get(), nullptr, 0);
+		_graphics->GetDeviceContext()->PSSetShaderResources(0, 1, _shaderResourceView.GetAddressOf());
+		_graphics->GetDeviceContext()->PSSetSamplers(0, 1, _samplerState.GetAddressOf());
 
 		// OM (Output Merger) : 최종 픽셀을 렌더 타겟에 출력
 		/* 실제 삼각형 그리기 (정점 개수 3, 시작 offset 0) */
 		//_deviceContext->Draw(_vertices.size(), 0);
-		_deviceContext->DrawIndexed(_indices.size(), 0, 0);
+		_graphics->GetDeviceContext()->DrawIndexed(_indices.size(), 0, 0);
 	}
 
 	/* 랜더링 끝, 화면에 출력 */
-	RenderEnd();
-}
-
-void Game::RenderBegin()
-{
-	/* view 개수, renderTargetView 주소, DepthStencilView(픽셀이 얼마나 깊이 있는지(Z값) */
-	_deviceContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), nullptr);
-	/* renderTargetView 색 초기화 */
-	_deviceContext->ClearRenderTargetView(_renderTargetView.Get(), _clearColor);
-	/* viewport 설정 */
-	_deviceContext->RSSetViewports(1, &_viewport);
-}
-
-void Game::RenderEnd()
-{
-	/* rendering 결과물을 전면버퍼에 복사한 후 화면에 출력 */
-	HRESULT hResult = _swapChain->Present(1, 0);
-	CHECK(hResult);
-}
-
-void Game::CreateDeviceAndSwapChain()
-{
-	DXGI_SWAP_CHAIN_DESC desc;
-	// memset과 같음, 배열 값 0으로 모두 초기화
-	ZeroMemory(&desc, sizeof(desc));
-
-	{
-		/* 버퍼 크기 초기화 */
-		desc.BufferDesc.Width = _width;
-		desc.BufferDesc.Height = _height;
-		/* 화면 주사율, 1초에 화면에 표시되는 이미지 수. (Numerator = 분자, Denominator = 분모) */
-		desc.BufferDesc.RefreshRate.Numerator = 60;
-		desc.BufferDesc.RefreshRate.Denominator = 1;
-		/* Display Format : RGBA 8-bit */
-		desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-		/* 주사선 그리기 모드 unspecified */
-		desc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-		desc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-		/* 픽셀단위 계단현상 보간 옵션, 1이면 MSAA 비활성화 */
-		desc.SampleDesc.Count = 1;
-		desc.SampleDesc.Quality = 0;
-		/* 해당 버퍼를 최종 결과물을 그리는 용도로 사용 */
-		desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-		/* 백 버퍼 1개 사용 */
-		desc.BufferCount = 1;
-		/* 출력 창 = _hwnd */
-		desc.OutputWindow = _hwnd;
-		/* 창모드로 실행 */
-		desc.Windowed = TRUE;
-		/* 렌더링 끝나고 프레젠트(화면에 보여주기)한 다음, 백 버퍼 내용은 버림 */
-		desc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	}
-
-	/*	DirectX 11 디바이스(Device), 디바이스 컨텍스트(Context), 스왑 체인(SwapChain) 생성
-	* 
-		D3D_DRIVER_TYPE : hardware (그래픽카드를 사용하겠다),
-		D3D_FEATURE_LEVEL : DX몇 버전에 해당하는 기능 지원,
-	*/
-	HRESULT hResult = ::D3D11CreateDeviceAndSwapChain(
-		nullptr,							// 기본 어댑터 사용
-		D3D_DRIVER_TYPE_HARDWARE,			// GPU(하드웨어 가속) 사용
-		nullptr,							// 소프트웨어 드라이버 없음
-		0,									// 플래그 (디버그 모드 등)
-		nullptr, 0,							// 피처 레벨 자동 선택 (DX11 우선)
-		D3D11_SDK_VERSION,					// SDK 버전
-		&desc,								// 스왑 체인 설정 정보
-		_swapChain.GetAddressOf(),			// 생성된 스왑 체인 저장
-		_device.GetAddressOf(),				// 생성된 디바이스 저장
-		nullptr,							// 실제 선택된 피처 레벨은 무시
-		_deviceContext.GetAddressOf()		// 생성된 디바이스 컨텍스트 저장
-	);
-
-	/* false라면 crash발생시킴 assert(SUCCEEDED(hResult))는 CHECK(hResult). pch에 정의함 */
-	CHECK(hResult);
-}
-
-void Game::CreateRenderTargetView()
-{
-	HRESULT hResult;
-	ComPtr<ID3D11Texture2D> backBuffer = nullptr;
-	// _swapChain에서 0번째 버퍼(ID3D11Texture2D)를 얻어 backBuffer 포인터에 저장
-	hResult = _swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)backBuffer.GetAddressOf());
-	CHECK(hResult);
-
-	// backBuffer를 기반으로 렌더 타겟 뷰 생성 후 _renderTargetView에 저장
-	hResult = _device->CreateRenderTargetView(backBuffer.Get(), nullptr, _renderTargetView.GetAddressOf());
-	CHECK(hResult);
-}
-
-void Game::SetViewport()
-{
-	/* 시작 위치 */
-	_viewport.TopLeftX = 0.f;
-	_viewport.TopLeftY = 0.f;
-	/* 너비와 높이 */
-	_viewport.Width = static_cast<float>(_width);
-	_viewport.Height = static_cast<float>(_height);
-	/* 깊이 */
-	_viewport.MinDepth = 0.f;
-	_viewport.MaxDepth = 1.f;
+	_graphics->RenderEnd();
 }
 
 void Game::CreateGeometry()
@@ -248,7 +150,7 @@ void Game::CreateGeometry()
 		data.pSysMem = &_vertices[0];
 
 		// desc와 data를 기반으로 버퍼 생성 후 _vertexBuffer에 저장
-		_device->CreateBuffer(&desc, &data, _vertexBuffer.GetAddressOf());
+		_graphics->GetDevice()->CreateBuffer(&desc, &data, _vertexBuffer.GetAddressOf());
 	}
 	/* Index 구성 */
 	{
@@ -276,7 +178,7 @@ void Game::CreateGeometry()
 		data.pSysMem = &_indices[0];
 
 		// desc와 data를 기반으로 버퍼 생성 후 _vertexBuffer에 저장
-		HRESULT hResult = _device->CreateBuffer(&desc, &data, _indexBuffer.GetAddressOf());
+		HRESULT hResult = _graphics->GetDevice()->CreateBuffer(&desc, &data, _indexBuffer.GetAddressOf());
 		CHECK(hResult);
 	}
 }
@@ -294,7 +196,7 @@ void Game::CreateInputLayout()
 	const int32 count = sizeof(layouts) / sizeof(D3D11_INPUT_ELEMENT_DESC);
 
 	/* 입력 레이아웃 생성 */
-	_device->CreateInputLayout(
+	_graphics->GetDevice()->CreateInputLayout(
 		layouts, count, _vertexBlob->GetBufferPointer(), _vertexBlob->GetBufferSize(), _inputLayout.GetAddressOf()
 	);
 }
@@ -305,7 +207,7 @@ void Game::CreateVertexShader()
 	LoadShaderFromFile(L"DefaultVertexShader.hlsl", "VS_main", "vs_5_0", _vertexBlob);
 
 	/* 생성된 _vertexBlob 정보를 통해 _vertexShader 생성 */
-	HRESULT hResult = _device->CreateVertexShader(
+	HRESULT hResult = _graphics->GetDevice()->CreateVertexShader(
 		_vertexBlob->GetBufferPointer(),
 		_vertexBlob->GetBufferSize(),
 		nullptr,
@@ -320,7 +222,7 @@ void Game::CreatePixelShader()
 	LoadShaderFromFile(L"DefaultVertexShader.hlsl", "PS", "ps_5_0", _pixelBlob);
 
 	/* 생성된 _pixelBlob 정보를 통해 _pixelShader 생성 */
-	HRESULT hResult = _device->CreatePixelShader(
+	HRESULT hResult = _graphics->GetDevice()->CreatePixelShader(
 		_pixelBlob->GetBufferPointer(),
 		_pixelBlob->GetBufferSize(),
 		nullptr,
@@ -340,7 +242,7 @@ void Game::CreateRasterizerState()
 	// 삼각형의 앞면 시계방향/반시계방향 여부 (false = 시계방향이 앞면)
 	desc.FrontCounterClockwise = false;
 
-	HRESULT hResult = _device->CreateRasterizerState(&desc, _rasterizerState.GetAddressOf());
+	HRESULT hResult = _graphics->GetDevice()->CreateRasterizerState(&desc, _rasterizerState.GetAddressOf());
 	CHECK(hResult);
 }
 
@@ -378,7 +280,7 @@ void Game::CreateSamplerState()
 	desc.MipLODBias = 0.f;
 
 	// 위 설정을 기반으로 샘플러 상태 객체 생성
-	HRESULT hResult = _device->CreateSamplerState(&desc, _samplerState.GetAddressOf());
+	HRESULT hResult = _graphics->GetDevice()->CreateSamplerState(&desc, _samplerState.GetAddressOf());
 	CHECK(hResult);
 }
 
@@ -410,7 +312,7 @@ void Game::CreateBlendState()
 	desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 	// 위 설정을 기반으로 BlendState 생성
-	HRESULT hResult = _device->CreateBlendState(&desc, _blendState.GetAddressOf());
+	HRESULT hResult = _graphics->GetDevice()->CreateBlendState(&desc, _blendState.GetAddressOf());
 	CHECK(hResult);
 }
 
@@ -425,7 +327,7 @@ void Game::CreateShaderResourceView()
 	CHECK(hResult);
 
 	// 읽어온 이미지 데이터를 기반으로 Shader Resource View 생성
-	hResult = ::CreateShaderResourceView(_device.Get(), img.GetImages(), img.GetImageCount(), md, _shaderResourceView.GetAddressOf());
+	hResult = ::CreateShaderResourceView(_graphics->GetDevice().Get(), img.GetImages(), img.GetImageCount(), md, _shaderResourceView.GetAddressOf());
 	CHECK(hResult);
 }
 
@@ -441,7 +343,7 @@ void Game::CreateConstantBuffer()
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 	// 설정된 desc를 기반으로 GPU에 Constant Buffer 생성 후 _constantBuffer에 저장
-	HRESULT hResult = _device->CreateBuffer(&desc, nullptr, _constantBuffer.GetAddressOf());
+	HRESULT hResult = _graphics->GetDevice()->CreateBuffer(&desc, nullptr, _constantBuffer.GetAddressOf());
 	CHECK(hResult);
 }
 
