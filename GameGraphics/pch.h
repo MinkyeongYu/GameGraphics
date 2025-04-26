@@ -10,6 +10,7 @@
 
 /* STL */
 #include <unordered_map>
+#include <memory>
 #include <vector>
 #include <list>
 #include <map>
@@ -46,3 +47,9 @@ using namespace Microsoft::WRL;
 
 // Engine
 #include "Graphics.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+#include "InputLayout.h"
+#include "Geometry.h"
+#include "GeometryHelper.h"
+#include "VertexData.h"

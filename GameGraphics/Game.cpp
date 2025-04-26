@@ -17,8 +17,15 @@ void Game::Init(HWND hwnd)
 	// [2] 백버퍼 기반의 렌더 타겟 뷰 생성
 	// [3] 화면에 출력할 뷰포트 크기 설정
 	//_graphics = make_shared<Graphics>(hwnd);
-	_graphics = new Graphics(hwnd);
-
+	_graphics = std::make_shared<Graphics>(hwnd);
+	// Create Geometry
+	_geometry = std::make_shared<Geometry<VertexTextureData>>();
+	// Create Vertex Buffer
+	_vertexBuffer = std::make_shared<VertexBuffer>(_graphics->GetDevice());
+	// Create Index Buffer
+	_indexBuffer = std::make_shared<IndexBuffer>(_graphics->GetDevice());
+	// Create Input Layout
+	_inputLayout = std::make_shared<InputLayout>(_graphics->GetDevice());
 
 	CreateGeometry();               // [4] 정점 데이터 정의 및 GPU 버퍼에 업로드, vertexBuffer 생성
 	CreateVertexShader();           // [5] 정점 셰이더 컴파일 및 생성
@@ -37,7 +44,7 @@ void Game::Update()
 	_localPosition.x += 0.001f;
 
 	// Create SRT
-	Matrix scaleMatrix			= Matrix::CreateScale(_localScale);
+	Matrix scaleMatrix			= Matrix::CreateScale(_localScale / 3);
 	Matrix rotationMatrix		= Matrix::CreateRotationX(_localRotation.x);
 	rotationMatrix				*= Matrix::CreateRotationY(_localRotation.y);
 	rotationMatrix				*= Matrix::CreateRotationZ(_localRotation.z);
@@ -72,15 +79,15 @@ void Game::Render()
 	/* IA - VS - RS - PS - OM */
 	{
 		// IA (Input Assembler) : 정점의 정보 전달
-		uint32 stride = sizeof(Vertex);					// 정점 1개 크기 (28바이트)
-		uint32 offset = 0;								// 버퍼의 시작 위치 오프셋
+		uint32 stride = sizeof(VertexTextureData);					// 정점 1개 크기 (28바이트)
+		uint32 offset = 0;											// 버퍼의 시작 위치 오프셋
 
 		/* GPU에게 정점 버퍼의 크기와 위치(stride, offset) 전달, vertices 사용함을 GPU에 알려줌 */
-		_graphics->GetDeviceContext()->IASetVertexBuffers(0, 1, _vertexBuffer.GetAddressOf(), &stride, &offset);
+		_graphics->GetDeviceContext()->IASetVertexBuffers(0, 1, _vertexBuffer->GetComPtr().GetAddressOf(), &stride, &offset);
 		/* 32-bit(4Byte) uint 인덱스 버퍼 GPU에 바인딩 */
-		_graphics->GetDeviceContext()->IASetIndexBuffer(_indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+		_graphics->GetDeviceContext()->IASetIndexBuffer(_indexBuffer->GetComPtr().Get(), DXGI_FORMAT_R32_UINT, 0);
 		/* GPU에게 정점 데이터의 구조 전달 */
-		_graphics->GetDeviceContext()->IASetInputLayout(_inputLayout.Get());
+		_graphics->GetDeviceContext()->IASetInputLayout(_inputLayout->GetComPtr().Get());
 		/* 각 정점을 어떻게 이어줄지 전달, 삼각형으로 이어주도록 설정 */
 		_graphics->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
@@ -100,7 +107,7 @@ void Game::Render()
 		// OM (Output Merger) : 최종 픽셀을 렌더 타겟에 출력
 		/* 실제 삼각형 그리기 (정점 개수 3, 시작 offset 0) */
 		//_deviceContext->Draw(_vertices.size(), 0);
-		_graphics->GetDeviceContext()->DrawIndexed(_indices.size(), 0, 0);
+		_graphics->GetDeviceContext()->DrawIndexed(_geometry->GetIndexCount(), 0, 0);
 	}
 
 	/* 랜더링 끝, 화면에 출력 */
@@ -111,94 +118,34 @@ void Game::CreateGeometry()
 {
 	/* Vertex Data */
 	{
-		/*	사각형이니까 정점 4개, 사각형의 정점 구성도
-		*	1  3
-		*	0  2
-		*/
-		_vertices.resize(4);
-
-		_vertices[0].position = Vec3(-0.5f, -0.5f, 0);
-		_vertices[0].uv = Vec2(0.f, 1.f);
-		//_vertices[0].color = Color(1.0f, 0.611f, 0.420f, 1.0f);
-
-		_vertices[1].position = Vec3(-0.5f, 0.5f, 0);
-		_vertices[1].uv = Vec2(0.f, 0.f);
-		//_vertices[1].color = Color(0.447f, 0.792f, 0.820f, 1.0f);
-
-		_vertices[2].position = Vec3(0.5f, -0.5f, 0);
-		_vertices[2].uv = Vec2(1.f, 1.f);
-		//_vertices[2].color = Color(0.996f, 0.969f, 0.8f, 1.0f);
-
-		_vertices[3].position = Vec3(0.5f, 0.5f, 0);
-		_vertices[3].uv = Vec2(1.f, 0.f);
-		//_vertices[3].color = Color(1.0f, 0.611f, 0.420f, 1.0f);
+		// Create Vertex Data and Index Data
+		GeometryHelper::CreateRectangle(_geometry);
 	}
 	/* Vertex Buffer 생성 */
 	{
-		D3D11_BUFFER_DESC desc;
-		ZeroMemory(&desc, sizeof(desc));
-		/* GPU만 읽을 수 있음. CPU 접근 불가 */
-		desc.Usage = D3D11_USAGE_IMMUTABLE;
-		/* Vertex Buffer 바인딩 용도로 사용 */
-		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		/* Vertex 크기 * 정점 개수 */
-		desc.ByteWidth = static_cast<uint32>(sizeof(Vertex) * _vertices.size());
-		
-		D3D11_SUBRESOURCE_DATA data;
-		ZeroMemory(&data, sizeof(data));
-		/* 첫번째 data 시작주소, _vertices.data()로 대체 가능 */
-		data.pSysMem = &_vertices[0];
-
-		// desc와 data를 기반으로 버퍼 생성 후 _vertexBuffer에 저장
-		_graphics->GetDevice()->CreateBuffer(&desc, &data, _vertexBuffer.GetAddressOf());
+		_vertexBuffer->Create(_geometry->GetVertices());
 	}
-	/* Index 구성 */
+	/* Index Data */
 	{
 		// 삼각형 1 : _vertices[0], _vertices[1], _vertices[2]
 		// 삼각형 2 : _vertices[2], _vertices[1], _vertices[3]
-		_indices = {
-			0, 1, 2,
-			2, 1, 3
-		};
 	}
-	/* Index Buffer 생성 */
+	/* Index Buffer 생성 - 정점을 재사용하여 메모리 사용을 줄이고, 렌더링 성능을 최적화하기 위함 */
 	{
-		D3D11_BUFFER_DESC desc;
-		ZeroMemory(&desc, sizeof(desc));
-		/* GPU만 읽을 수 있음. CPU 접근 불가 */
-		desc.Usage = D3D11_USAGE_IMMUTABLE;
-		/* Index Buffer 바인딩 용도로 사용 */
-		desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		/* uint32 크기 * 인덱스 개수 */
-		desc.ByteWidth = static_cast<uint32>(sizeof(uint32) * _indices.size());
-
-		D3D11_SUBRESOURCE_DATA data;
-		ZeroMemory(&data, sizeof(data));
-		/* 첫번째 data 시작주소, _indices.data()로 대체 가능 */
-		data.pSysMem = &_indices[0];
-
-		// desc와 data를 기반으로 버퍼 생성 후 _vertexBuffer에 저장
-		HRESULT hResult = _graphics->GetDevice()->CreateBuffer(&desc, &data, _indexBuffer.GetAddressOf());
-		CHECK(hResult);
+		_indexBuffer->Create(_geometry->GetIndices());
 	}
 }
 
 void Game::CreateInputLayout()
 {
-	D3D11_INPUT_ELEMENT_DESC layouts[] = 
+	std::vector<D3D11_INPUT_ELEMENT_DESC> layouts = 
 	{
 		/* 정점 위치(POSITION): float 3개 (X, Y, Z), 오프셋 0부터 시작 */
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
 		/*  UV : float 2개 (R, G), 오프셋 12부터 시작 (POSITION 뒤) */
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
-	/* (배열 / 원소)로 원소 개수 구하기 */
-	const int32 count = sizeof(layouts) / sizeof(D3D11_INPUT_ELEMENT_DESC);
-
-	/* 입력 레이아웃 생성 */
-	_graphics->GetDevice()->CreateInputLayout(
-		layouts, count, _vertexBlob->GetBufferPointer(), _vertexBlob->GetBufferSize(), _inputLayout.GetAddressOf()
-	);
+	_inputLayout->Create(layouts, _vertexBlob);
 }
 
 void Game::CreateVertexShader()

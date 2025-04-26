@@ -48,23 +48,29 @@ private:
 private:
 	HWND _hwnd;
 
-	Graphics* _graphics;
+	// Device, DeviceContext, SwapChain, RenderTargetView, Viewport 생성
+	std::shared_ptr<Graphics> _graphics;
+	// 정점 데이터를 GPU VRAM에 전달하기 위한 버퍼 (Vertex Buffer) 생성
+	std::shared_ptr<VertexBuffer> _vertexBuffer;
+	// 인덱스 데이터를 GPU VRAM에 전달하기 위한 버퍼 (Index Buffer) 생성
+	std::shared_ptr<IndexBuffer> _indexBuffer;
+	// 정점 버퍼의 데이터 구조를 GPU에게 알려주는 입력 레이아웃
+	std::shared_ptr<InputLayout> _inputLayout;
+	// 정점 데이터, 인덱스 데이터 구조 생성
+	std::shared_ptr<Geometry<VertexTextureData>> _geometry;
 
 private:
 	/* Geometry */
 	// 정점 리스트 (CPU 메모리)
-	std::vector<Vertex> _vertices;
+	//std::vector<Vertex> _vertices;
 	// 인덱스 리스트 (CPU 메모리)
-	std::vector<uint32> _indices;
-	// GPU Buffers
-	// 정점 데이터를 GPU VRAM에 전달하기 위한 버퍼 (Vertex Buffer)
-	ComPtr<ID3D11Buffer> _vertexBuffer = nullptr;
-	// 인덱스 데이터를 GPU VRAM에 전달하기 위한 버퍼 (Index Buffer) 
-	ComPtr<ID3D11Buffer> _indexBuffer = nullptr;
+	//std::vector<uint32> _indices;
+	
+	// Input Assembler - GPU Buffers
+	// Vertex Buffer
+	// Index Buffer
+	// Input Layout
 
-	/* Input Layout */
-	// 정점 버퍼의 데이터 구조를 GPU에게 알려주는 입력 레이아웃
-	ComPtr<ID3D11InputLayout> _inputLayout = nullptr;
 
 	/* Vertex Shader */
 	// 정점 셰이더 객체 (GPU에서 정점 위치/속성 처리)
