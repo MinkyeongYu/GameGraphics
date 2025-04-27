@@ -18,25 +18,64 @@ void Game::Init(HWND hwnd)
 	// [3] 화면에 출력할 뷰포트 크기 설정
 	//_graphics = make_shared<Graphics>(hwnd);
 	_graphics = std::make_shared<Graphics>(hwnd);
-	// Create Geometry
-	_geometry = std::make_shared<Geometry<VertexTextureData>>();
-	// Create Vertex Buffer
-	_vertexBuffer = std::make_shared<VertexBuffer>(_graphics->GetDevice());
-	// Create Index Buffer
-	_indexBuffer = std::make_shared<IndexBuffer>(_graphics->GetDevice());
-	// Create Input Layout
-	_inputLayout = std::make_shared<InputLayout>(_graphics->GetDevice());
 
-	CreateGeometry();               // [4] 정점 데이터 정의 및 GPU 버퍼에 업로드, vertexBuffer 생성
-	CreateVertexShader();           // [5] 정점 셰이더 컴파일 및 생성
-	CreateInputLayout();            // [6] 정점 구조 정의 (셰이더와 버퍼 연결)
-	CreateRasterizerState();		// [7] 래스터라이저 상태 생성 (삼각형 그리는 방식, 컬링, 채우기 모드 등 설정)
-	CreatePixelShader();            // [8] 픽셀 셰이더 컴파일 및 생성
-	CreateSamplerState();			// [9] 샘플러 상태 생성
+	{
+		// Create Geometry
+		_geometry = std::make_shared<Geometry<VertexTextureData>>();
+		// Create Vertex Buffer
+		_vertexBuffer = std::make_shared<VertexBuffer>(_graphics->GetDevice());
+		// Create Index Buffer
+		_indexBuffer = std::make_shared<IndexBuffer>(_graphics->GetDevice());
+		// Create Input Layout
+		_inputLayout = std::make_shared<InputLayout>(_graphics->GetDevice());
+		// Create Vertex Shader
+		_vertexShader = std::make_shared<VertexShader>(_graphics->GetDevice());
+		// Create Pixel Shader
+		_pixelShader = std::make_shared<PixelShader>(_graphics->GetDevice());
+		// Create Shader Resource View
+		_shaderResoureView = std::make_shared<Texture>(_graphics->GetDevice());
+		// Create Constant Buffer
+		_constantBuffer = std::make_shared<ConstantBuffer<TransformData>>(_graphics->GetDevice(), _graphics->GetDeviceContext());
+	}
 
-	CreateShaderResourceView();		// [10] 텍스처 리소스 뷰 생성
-	CreateConstantBuffer();			// [11] 상수 버퍼 생성
-	CreateBlendState();				// [12] 블렌딩 상태 생성
+
+	// [4] 정점 데이터 정의 및 GPU 버퍼에 업로드, vertexBuffer 생성
+	/* Create Vertex Data & Index Data */				
+	{
+		/* Index Data */
+		// 삼각형 1 : _vertices[0], _vertices[1], _vertices[2]
+		// 삼각형 2 : _vertices[2], _vertices[1], _vertices[3]
+		GeometryHelper::CreateRectangle(_geometry);
+	}
+	/* Vertex Buffer 생성 */
+	{
+		_vertexBuffer->Create(_geometry->GetVertices());
+	}
+	/* Index Buffer 생성 - 정점을 재사용하여 메모리 사용을 줄이고, 렌더링 성능을 최적화하기 위함 */
+	{
+		_indexBuffer->Create(_geometry->GetIndices());
+	}
+	
+	// [5] 정점 셰이더 컴파일 및 생성
+	/* vertex shader load 후 _vertexBlob에 결과 저장 */
+	_vertexShader->Create(L"DefaultVertexShader.hlsl", "VS_main", "vs_5_0");  
+	// [6] 정점 구조 정의 (셰이더와 버퍼 연결), CreateInputLayout()
+	_inputLayout->Create(VertexTextureData::descs, _vertexShader->GetBlob());	
+	// [7] 래스터라이저 상태 생성 (삼각형 그리는 방식, 컬링, 채우기 모드 등 설정)
+	CreateRasterizerState();														
+	
+	// [8] 픽셀 셰이더 컴파일 및 생성
+	/* pixel shader load 후 _pixelBlob에 결과 저장 */
+	_pixelShader->Create(L"DefaultVertexShader.hlsl", "PS", "ps_5_0");	
+	// [9] 샘플러 상태 생성
+	CreateSamplerState();															
+
+	// [10] 쉐이더 리소스 뷰 생성
+	_shaderResoureView->CreateShaderResourceView(L"hamster_latte.png");
+	// [11] 상수 버퍼 생성
+	_constantBuffer->CreateConstantBuffer();
+	// [12] 블렌딩 상태 생성
+	CreateBlendState();																
 }
 
 void Game::Update()
@@ -54,21 +93,8 @@ void Game::Update()
 	Matrix worldMatrix = scaleMatrix * rotationMatrix * translationMatrix;
 	_transformData.worldMatrix = worldMatrix;
 
-	D3D11_MAPPED_SUBRESOURCE subResource;
-	ZeroMemory(&subResource, sizeof(subResource));
-
-	// GPU의 Constant Buffer를 CPU에서 쓰기 위한 접근 요청
-	_graphics->GetDeviceContext()->Map(
-		_constantBuffer.Get(),			// 업데이트할 Constant Buffer
-		0,								// 서브리소스 인덱스 (일반적으로 0)
-		D3D11_MAP_WRITE_DISCARD,		// 이전 내용은 버리고 새로 쓰기 (가장 일반적인 방식)
-		0,								// Reserved (항상 0)
-		&subResource					// 매핑 결과를 받을 구조체 (CPU가 접근 가능한 포인터 제공됨)
-	);
-	// _transformData값을 GPU메모리로 복사한 후, GPU의 Constant Buffer에 업로드
-	::memcpy(subResource.pData, &_transformData, sizeof(_transformData));
-	// 맵핑 해제 → GPU에서 읽을 수 있도록 다시 연결
-	_graphics->GetDeviceContext()->Unmap(_constantBuffer.Get(), 0);
+	// 버퍼에 데이터 복사
+	_constantBuffer->CopyData(_transformData);
 }
 
 void Game::Render()
@@ -92,16 +118,16 @@ void Game::Render()
 		_graphics->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		// VS (Vertex Shader) : 정점의 위치/색상 등 가공
-		_graphics->GetDeviceContext()->VSSetShader(_vertexShader.Get(), nullptr, 0);
-		_graphics->GetDeviceContext()->VSSetConstantBuffers(0, 1, _constantBuffer.GetAddressOf());
+		_graphics->GetDeviceContext()->VSSetShader(_vertexShader->GetComPtr().Get(), nullptr, 0);
+		_graphics->GetDeviceContext()->VSSetConstantBuffers(0, 1, _constantBuffer->GetComPtr().GetAddressOf());
 
 		// RS (Rasterizer) : 정점 → 픽셀로 삼각형 그리기
 		/* Draw()호출 시 내부적으로 GPU가 자동으로 Rasterizer 실행함 */
 		_graphics->GetDeviceContext()->RSSetState(_rasterizerState.Get());
 
 		// PS (Pixel Shader) : 픽셀 단위 색상 처리
-		_graphics->GetDeviceContext()->PSSetShader(_pixelShader.Get(), nullptr, 0);
-		_graphics->GetDeviceContext()->PSSetShaderResources(0, 1, _shaderResourceView.GetAddressOf());
+		_graphics->GetDeviceContext()->PSSetShader(_pixelShader->GetComPtr().Get(), nullptr, 0);
+		_graphics->GetDeviceContext()->PSSetShaderResources(0, 1, _shaderResoureView->GetComPtr().GetAddressOf());
 		_graphics->GetDeviceContext()->PSSetSamplers(0, 1, _samplerState.GetAddressOf());
 
 		// OM (Output Merger) : 최종 픽셀을 렌더 타겟에 출력
@@ -112,70 +138,6 @@ void Game::Render()
 
 	/* 랜더링 끝, 화면에 출력 */
 	_graphics->RenderEnd();
-}
-
-void Game::CreateGeometry()
-{
-	/* Vertex Data */
-	{
-		// Create Vertex Data and Index Data
-		GeometryHelper::CreateRectangle(_geometry);
-	}
-	/* Vertex Buffer 생성 */
-	{
-		_vertexBuffer->Create(_geometry->GetVertices());
-	}
-	/* Index Data */
-	{
-		// 삼각형 1 : _vertices[0], _vertices[1], _vertices[2]
-		// 삼각형 2 : _vertices[2], _vertices[1], _vertices[3]
-	}
-	/* Index Buffer 생성 - 정점을 재사용하여 메모리 사용을 줄이고, 렌더링 성능을 최적화하기 위함 */
-	{
-		_indexBuffer->Create(_geometry->GetIndices());
-	}
-}
-
-void Game::CreateInputLayout()
-{
-	std::vector<D3D11_INPUT_ELEMENT_DESC> layouts = 
-	{
-		/* 정점 위치(POSITION): float 3개 (X, Y, Z), 오프셋 0부터 시작 */
-		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		/*  UV : float 2개 (R, G), 오프셋 12부터 시작 (POSITION 뒤) */
-		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
-	};
-	_inputLayout->Create(layouts, _vertexBlob);
-}
-
-void Game::CreateVertexShader()
-{
-	/* vertex shader load 후 _vertexBlob에 결과 저장 */
-	LoadShaderFromFile(L"DefaultVertexShader.hlsl", "VS_main", "vs_5_0", _vertexBlob);
-
-	/* 생성된 _vertexBlob 정보를 통해 _vertexShader 생성 */
-	HRESULT hResult = _graphics->GetDevice()->CreateVertexShader(
-		_vertexBlob->GetBufferPointer(),
-		_vertexBlob->GetBufferSize(),
-		nullptr,
-		_vertexShader.GetAddressOf()
-	);
-	CHECK(hResult);
-}
-
-void Game::CreatePixelShader()
-{
-	/* pixel shader load 후 _pixelBlob에 결과 저장 */
-	LoadShaderFromFile(L"DefaultVertexShader.hlsl", "PS", "ps_5_0", _pixelBlob);
-
-	/* 생성된 _pixelBlob 정보를 통해 _pixelShader 생성 */
-	HRESULT hResult = _graphics->GetDevice()->CreatePixelShader(
-		_pixelBlob->GetBufferPointer(),
-		_pixelBlob->GetBufferSize(),
-		nullptr,
-		_pixelShader.GetAddressOf()
-	);
-	CHECK(hResult);
 }
 
 void Game::CreateRasterizerState()
@@ -260,54 +222,5 @@ void Game::CreateBlendState()
 
 	// 위 설정을 기반으로 BlendState 생성
 	HRESULT hResult = _graphics->GetDevice()->CreateBlendState(&desc, _blendState.GetAddressOf());
-	CHECK(hResult);
-}
-
-void Game::CreateShaderResourceView()
-{
-	// PNG 이미지 파일 로드
-	DirectX::TexMetadata md;		// 텍스처 메타데이터 (크기, 포맷 등)
-	DirectX::ScratchImage img;		// 이미지 데이터를 임시 저장할 객체
-
-	// WIC(Windows Imaging Component)를 통해 PNG 파일을 읽고 img에 저장
-	HRESULT hResult = ::LoadFromWICFile(L"hamster_latte.png", WIC_FLAGS_NONE, &md, img);
-	CHECK(hResult);
-
-	// 읽어온 이미지 데이터를 기반으로 Shader Resource View 생성
-	hResult = ::CreateShaderResourceView(_graphics->GetDevice().Get(), img.GetImages(), img.GetImageCount(), md, _shaderResourceView.GetAddressOf());
-	CHECK(hResult);
-}
-
-void Game::CreateConstantBuffer()
-{
-	D3D11_BUFFER_DESC desc;
-	ZeroMemory(&desc, sizeof(desc));
-
-	// CPU 쓰기 가능, GPU 읽기 가능 (매 프레임마다 CPU에서 업데이트 할 경우)
-	desc.Usage = D3D11_USAGE_DYNAMIC;
-	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	desc.ByteWidth = sizeof(TransformData);
-	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-	// 설정된 desc를 기반으로 GPU에 Constant Buffer 생성 후 _constantBuffer에 저장
-	HRESULT hResult = _graphics->GetDevice()->CreateBuffer(&desc, nullptr, _constantBuffer.GetAddressOf());
-	CHECK(hResult);
-}
-
-void Game::LoadShaderFromFile(const std::wstring& path, const std::string& name, const std::string& version, ComPtr<ID3DBlob>& blob)
-{
-	const uint32 comileFlag = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
-	
-	HRESULT hResult = ::D3DCompileFromFile(
-		path.c_str(),								// path: HLSL 셰이더 파일 경로
-		nullptr,									// pDefines: 셰이더 전처리 매크로 (사용 안 함)
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,			// pInclude: #include 허용 (로컬 파일 포함 가능)
-		name.c_str(),								// entryPoint: 셰이더 진입 지점 함수 이름 (예: "main")
-		version.c_str(),							// target: 셰이더 모델 (예: "vs_5_0", "ps_5_0")
-		comileFlag,									// Flags1: 컴파일 옵션 (디버그용 플래그 사용)
-		0,											// Flags2: 고정값 (사용 안 함)
-		blob.GetAddressOf(),						// ppCode: 컴파일 결과(ID3DBlob)를 저장할 포인터
-		nullptr										// ppErrorMsgs: 에러 메시지 Blob (사용 안 함)
-	);
 	CHECK(hResult);
 }

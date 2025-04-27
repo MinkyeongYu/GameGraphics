@@ -53,3 +53,6 @@ using namespace Microsoft::WRL;
 #include "Geometry.h"
 #include "GeometryHelper.h"
 #include "VertexData.h"
+#include "Shader.h"
+#include "ConstantBuffer.h"
+#include "Texture.h"

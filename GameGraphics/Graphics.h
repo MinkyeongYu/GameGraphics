@@ -1,5 +1,8 @@
 #pragma once
 
+/* Graphics
+ * : Device, DeviceContext, SwapChain, RenderTargetView, Viewport 등을 생성 및 관리하는 클래스
+ */
 class Graphics
 {
 public:

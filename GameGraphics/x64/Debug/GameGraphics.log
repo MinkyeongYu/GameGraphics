@@ -1,5 +1,16 @@
-﻿  Game.cpp
+﻿  pch.cpp
+  ConstantBuffer.cpp
+  Game.cpp
+  GameGraphics.cpp
+  Geometry.cpp
   GeometryHelper.cpp
+  Graphics.cpp
+  IndexBuffer.cpp
+  InputLayout.cpp
+  Shader.cpp
+  SimpleMath.cpp
+  Texture.cpp
+  VertexBuffer.cpp
   VertexData.cpp
   코드를 생성하고 있습니다...
   GameGraphics.vcxproj -> C:\Users\user\Desktop\GameGraphics\x64\Debug\GameGraphics.exe

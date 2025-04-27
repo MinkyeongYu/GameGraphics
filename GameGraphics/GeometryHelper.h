@@ -2,7 +2,9 @@
 #include "VertexData.h" 
 #include "Geometry.h"
 
-/* 도형 그리기(삼각형 정점 정보) 같은 간단한 작업 */
+/* GeometryHelper
+ * : 사각형(Rectangle) 등 간단한 기하 도형을 생성해주는 헬퍼 클래스
+ */
 class GeometryHelper
 {
 public:

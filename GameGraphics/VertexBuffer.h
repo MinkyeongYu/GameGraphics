@@ -1,5 +1,8 @@
 #pragma once
 
+/* VertexBuffer
+ * : 정점(Vertex) 데이터를 GPU VRAM에 업로드하고, IA(Input Assembler) 단계에서 사용하는 버퍼 클래스
+ */
 class VertexBuffer
 {
 public:

@@ -1,7 +1,10 @@
 #pragma once
 
 /* 정점에 대한 정의 */
-// UV, Texture
+
+/* VertexTextureData
+ * : 정점의 위치(Position)와 텍스처 좌표(UV)를 포함하는 데이터 구조체
+ */
 struct VertexTextureData
 {
 	Vec3 position	= { 0, 0, 0 };		// offset 0, size = float count 3 * sizeof(float) = 12Byte
@@ -9,7 +12,9 @@ struct VertexTextureData
 
 	static std::vector<D3D11_INPUT_ELEMENT_DESC> descs;
 };
-// Color
+/* VertexColorData
+ * : 정점의 위치(Position)와 색상(Color)를 포함하는 데이터 구조체
+ */
 struct VertexColorData
 {
 	Vec3 position	= {0, 0, 0};			// offset 0, size = float count 3 * sizeof(float) = 12Byte

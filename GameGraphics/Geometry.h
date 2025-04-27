@@ -1,6 +1,8 @@
 #pragma once
 
-/* 정점, 인덱스 처리 클래스 */
+/* Geometry
+ * : 정점(Vertex)과 인덱스(Index) 데이터를 CPU 메모리 상에서 관리하는 템플릿 클래스
+ */
 template<typename T>
 class Geometry
 {
