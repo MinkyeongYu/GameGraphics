@@ -16,38 +16,6 @@ public:
 	void Render();
 
 private:
-	/* 기하학적 도형 그리기 */
-	//void CreateGeometry();
-	/* GPU가 정점 데이터를 올바르게 해석할 수 있도록 입력 레이아웃(Input Layout)을 생성 */
-	//void CreateInputLayout();
-
-	//void CreateVertexShader();
-	//void CreatePixelShader();
-
-	/* RasterizerState 생성
-	   - 삼각형을 화면에 어떻게 그릴지 설정 (채우기 모드, 컬링, 앞면 방향 등) */
-	void CreateRasterizerState();
-
-	/* Sampler State 생성
-	   - 픽셀 셰이더에서 텍스처 좌표(UV)를 어떻게 샘플링할지 설정
-		 (보간 방식, 경계 처리 방식 등) */
-	void CreateSamplerState();
-
-	/* Blend State 생성
-	   - 픽셀이 렌더 타겟에 출력될 때, 기존 픽셀과 새 픽셀을 어떻게 섞을지 설정
-		 (투명도, 알파 블렌딩 등 처리 방식) */
-	void CreateBlendState();
-
-	/* Shader Resource View 생성 */
-	//void CreateShaderResourceView();
-
-	/* Constant Buffer 생성 */
-	//void CreateConstantBuffer();
-
-	/* DefaultVertexShader.hlsl에서 shader 로드하고 컴파일하여 결과를 ID3DBlob에 저장 */
-	//void LoadShaderFromFile(const std::wstring& path, const std::string& name, const std::string& version, ComPtr<ID3DBlob>& blob);
-
-private:
 	HWND _hwnd;
 
 	/* Graphics
@@ -74,6 +42,15 @@ private:
 	: 정점 변환 단계 (월드/뷰/프로젝션 행렬 적용)에서 실행되는 셰이더 */
 	std::shared_ptr<VertexShader> _vertexShader;
 
+	/* Constant Buffer
+	: IA(Input Assembler) 이후 VS(Vertex Shader)/PS(Pixel Shader) 단계에서 공통 데이터를 전달하는 용도 */
+	std::shared_ptr<ConstantBuffer<TransformData>> _constantBuffer;
+
+	/* Rasterizer State
+	 * : 삼각형을 화면에 어떻게 그릴지(채우기, 컬링 등) 설정하는 래스터라이저 상태 객체
+	 */
+	std::shared_ptr<RasterizerState> _rasterizerState;
+
 	/* Pixel Shader
 	: 픽셀 색상 계산 단계 (텍스처, 라이팅 적용)에서 실행되는 셰이더 */
 	std::shared_ptr<PixelShader> _pixelShader;
@@ -82,50 +59,16 @@ private:
 	: 셰이더(Shader)가 GPU 리소스(텍스처, 버퍼 등)에 접근할 수 있도록 만들어주는 객체 */
 	std::shared_ptr<Texture> _shaderResoureView;
 
-	/* Constant Buffer
-	: IA(Input Assembler) 이후 VS(Vertex Shader)/PS(Pixel Shader) 단계에서 공통 데이터를 전달하는 용도 */
-	std::shared_ptr<ConstantBuffer<TransformData>> _constantBuffer;
+	/* Sampler State
+	 * : 텍스처 좌표(UV) 샘플링 방식과 경계 처리 방식을 정의하는 샘플러 상태 객체
+	 */
+	std::shared_ptr<SamplerState> _samplerState;
 
-private:
-	/* Geometry */
-	// 정점 리스트 (CPU 메모리)
-	//std::vector<Vertex> _vertices;
-	// 인덱스 리스트 (CPU 메모리)
-	//std::vector<uint32> _indices;
-	
-	// Input Assembler - GPU Buffers
-	// Vertex Buffer
-	// Index Buffer
-	// Input Layout
+	/* Blend State
+	 * : 픽셀 색상 혼합(알파 블렌딩 등) 방식을 정의하는 블렌딩 상태 객체
+	 */
+	std::shared_ptr<BlendState> _blendState;
 
-
-	/* Vertex Shader */
-	// 정점 셰이더 객체 (GPU에서 정점 위치/속성 처리)
-	//ComPtr<ID3D11VertexShader> _vertexShader = nullptr;
-	// 정점 셰이더의 바이트 코드 (InputLayout 생성에도 사용)
-	//ComPtr<ID3DBlob> _vertexBlob = nullptr;
-
-	/* Rasterizer State */
-	ComPtr<ID3D11RasterizerState> _rasterizerState = nullptr;
-
-	/* Pixel Shader */
-	// 픽셀 셰이더 객체 (GPU에서 픽셀 색상 처리)
-	//ComPtr<ID3D11PixelShader> _pixelShader = nullptr;
-	// 픽셀 셰이더의 바이트 코드
-	//ComPtr<ID3DBlob> _pixelBlob = nullptr;
-
-	/* Shader Resource View 
-		: 셰이더(Shader)가 GPU 리소스(텍스처, 버퍼 등)에 접근할 수 있도록 만들어주는 객체 */
-	//ComPtr<ID3D11ShaderResourceView> _shaderResourceView = nullptr;
-
-	/* Sampler State 객체
-   - 텍스처 샘플링 시 보간 방식(Filter), 경계 처리(AddressMode) 등을 정의한 상태 객체
-   - 픽셀 셰이더에서 텍스처 좌표(UV)를 어떻게 해석할지 GPU에게 알려줌 */
-	ComPtr<ID3D11SamplerState> _samplerState = nullptr;
-
-	/*	Blend State 객체 
-		: 픽셀 색상 혼합 방식 설정: 알파 블렌딩 등 */
-	ComPtr<ID3D11BlendState> _blendState = nullptr;
 private:
 	/* Constant Buffer */
 	TransformData _transformData;

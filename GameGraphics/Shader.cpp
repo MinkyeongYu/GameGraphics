@@ -33,7 +33,8 @@ void Shader::LoadShaderFromFile(const std::wstring& path, const std::string& nam
 	CHECK(hResult);
 }
 
-VertexShader::VertexShader(ComPtr<ID3D11Device> device) : Super(device)
+VertexShader::VertexShader(ComPtr<ID3D11Device> device) 
+	: Super(device)
 {
 }
 
@@ -56,7 +57,8 @@ void VertexShader::Create(const std::wstring& path, const std::string& name, con
 	CHECK(hResult);
 }
 
-PixelShader::PixelShader(ComPtr<ID3D11Device> device) : Super(device)
+PixelShader::PixelShader(ComPtr<ID3D11Device> device) 
+	: Super(device)
 {
 }
 
