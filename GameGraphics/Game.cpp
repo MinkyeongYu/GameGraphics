@@ -16,8 +16,8 @@ void Game::Init(HWND hwnd)
 	// [1] DirectX 핵심 객체들 생성
 	// [2] 백버퍼 기반의 렌더 타겟 뷰 생성
 	// [3] 화면에 출력할 뷰포트 크기 설정
-	//_graphics = make_shared<Graphics>(hwnd);
 	_graphics = std::make_shared<Graphics>(hwnd);
+	_pipeline = std::make_shared<Pipeline>(_graphics->GetDeviceContext());
 
 	{
 		// Create Geometry
@@ -110,37 +110,43 @@ void Game::Render()
 
 	/* IA - VS - RS - PS - OM */
 	{
-		// IA (Input Assembler) : 정점의 정보 전달
-		uint32 stride = sizeof(VertexTextureData);					// 정점 1개 크기 (28바이트)
-		uint32 offset = 0;											// 버퍼의 시작 위치 오프셋
+		PipelineInfo info;
+		info._inputLayout		= _inputLayout;
+		info._vertexShader		= _vertexShader;
+		info._pixelShader		= _pixelShader;
+		info._rasterizerState	= _rasterizerState;
+		info._blendState		= _blendState;
 
+		/* 
+		- IA : GPU에게 정점 데이터의 구조 전달
+			 : _graphics->GetDeviceContext()->IASetInputLayout(_inputLayout->GetComPtr().Get());
+		- IA : 각 정점을 어떻게 이어줄지 전달, 삼각형으로 이어주도록 설정
+			 : _graphics->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		- VS, PS : Vertex, Pixel Shader 설정
+			 : _graphics->GetDeviceContext()->VSSetShader(_vertexShader->GetComPtr().Get(), nullptr, 0);
+			  _graphics->GetDeviceContext()->PSSetShader(_pixelShader->GetComPtr().Get(), nullptr, 0);
+		- RS : 정점 → 픽셀로 삼각형 그리기
+			 : _graphics->GetDeviceContext()->RSSetState(_rasterizerState->GetComPtr().Get());
+		- OM : Blend State
+			 : _graphics->GetDeviceContext()->OMSetBlendState(_blendState->GetComPtr().Get(), _blendState->GetBlendFactor(), _blendState->GetSampleMask());
+		*/
+		_pipeline->UpdatePipeline(info);
+
+		// IA (Input Assembler) : 정점의 정보 전달
 		/* GPU에게 정점 버퍼의 크기와 위치(stride, offset) 전달, vertices 사용함을 GPU에 알려줌 */
-		_graphics->GetDeviceContext()->IASetVertexBuffers(0, 1, _vertexBuffer->GetComPtr().GetAddressOf(), &stride, &offset);
+		_pipeline->SetVertexBuffer(_vertexBuffer);
 		/* 32-bit(4Byte) uint 인덱스 버퍼 GPU에 바인딩 */
-		_graphics->GetDeviceContext()->IASetIndexBuffer(_indexBuffer->GetComPtr().Get(), DXGI_FORMAT_R32_UINT, 0);
-		/* GPU에게 정점 데이터의 구조 전달 */
-		_graphics->GetDeviceContext()->IASetInputLayout(_inputLayout->GetComPtr().Get());
-		/* 각 정점을 어떻게 이어줄지 전달, 삼각형으로 이어주도록 설정 */
-		_graphics->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		_pipeline->SetIndexBuffer(_indexBuffer);
 
 		// VS (Vertex Shader) : 정점의 위치/색상 등 가공
-		_graphics->GetDeviceContext()->VSSetShader(_vertexShader->GetComPtr().Get(), nullptr, 0);
-		_graphics->GetDeviceContext()->VSSetConstantBuffers(0, 1, _constantBuffer->GetComPtr().GetAddressOf());
-
-		// RS (Rasterizer) : 정점 → 픽셀로 삼각형 그리기
-		/* Draw()호출 시 내부적으로 GPU가 자동으로 Rasterizer 실행함 */
-		_graphics->GetDeviceContext()->RSSetState(_rasterizerState->GetComPtr().Get());
+		_pipeline->SetConstantBuffer(0, SS_VertexShader, _constantBuffer);
 
 		// PS (Pixel Shader) : 픽셀 단위 색상 처리
-		_graphics->GetDeviceContext()->PSSetShader(_pixelShader->GetComPtr().Get(), nullptr, 0);
-		_graphics->GetDeviceContext()->PSSetShaderResources(0, 1, _shaderResoureView->GetComPtr().GetAddressOf());
-		_graphics->GetDeviceContext()->PSSetSamplers(0, 1, _samplerState->GetComPtr().GetAddressOf());
+		_pipeline->SetShaderResources(0, SS_PixelShader, _shaderResoureView);
+		_pipeline->SetSamplerState(0, SS_PixelShader, _samplerState);
 
 		// OM (Output Merger) : 최종 픽셀을 렌더 타겟에 출력
-		_graphics->GetDeviceContext()->OMSetBlendState(_blendState->GetComPtr().Get(), _blendState->GetBlendFactor(), _blendState->GetSampleMask());
-		/* 실제 삼각형 그리기 (정점 개수 3, 시작 offset 0) */
-		//_deviceContext->Draw(_vertices.size(), 0);
-		_graphics->GetDeviceContext()->DrawIndexed(_geometry->GetIndexCount(), 0, 0);
+		_pipeline->DrawIndexed(_geometry->GetIndexCount(), 0, 0);
 	}
 
 	/* 랜더링 끝, 화면에 출력 */
