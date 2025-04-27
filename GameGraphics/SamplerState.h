@@ -9,6 +9,7 @@ public:
 	SamplerState(ComPtr<ID3D11Device> device);
 	~SamplerState();
 
+public:
 	ComPtr<ID3D11SamplerState> GetComPtr() { return _samplerState; }
 
 	/* Sampler State »ý¼º

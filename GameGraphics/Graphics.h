@@ -9,6 +9,7 @@ public:
 	Graphics(HWND hwnd);
 	~Graphics();
 
+public:
 	void RenderBegin();
 	void RenderEnd();
 
@@ -48,5 +49,6 @@ private:
 	/* Misc : 잡다한 것들 */
 	// D3D11_VIEWPORT : 화면을 묘사하는 구조체
 	D3D11_VIEWPORT _viewport = { 0 };
+	// 분홍색
 	float _clearColor[4] = { 1.0f, 0.576f, 0.674f, 0.5f };
 };

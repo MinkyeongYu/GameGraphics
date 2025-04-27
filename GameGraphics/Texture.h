@@ -9,6 +9,7 @@ public:
 	Texture(ComPtr<ID3D11Device> device);
 	~Texture();
 
+public:
 	ComPtr<ID3D11ShaderResourceView> GetComPtr() { return _shaderResourceView; }
 
 	void CreateShaderResourceView(const std::wstring& path);

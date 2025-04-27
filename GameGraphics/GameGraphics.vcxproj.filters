@@ -48,6 +48,9 @@
     <Filter Include="소스 파일\00.Engine\Pipeline\05.OutputMerger">
       <UniqueIdentifier>{3aa7f2b5-6d83-4c48-bb70-d0d05b74cb08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\00.Engine\GameObject">
+      <UniqueIdentifier>{bebbee79-4886-4630-8fd6-6dbc50e19a71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameGraphics.h">
@@ -122,6 +125,9 @@
     <ClInclude Include="Pipeline.h">
       <Filter>소스 파일\00.Engine\Pipeline</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>소스 파일\00.Engine\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameGraphics.rc">
@@ -190,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="Pipeline.cpp">
       <Filter>소스 파일\00.Engine\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\00.Engine\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

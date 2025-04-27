@@ -18,6 +18,7 @@ public:
 	Shader(ComPtr<ID3D11Device> device);
 	virtual ~Shader();
 
+public:
 	virtual void Create(const std::wstring& path, const std::string& name, const std::string& version) abstract;
 
 	ComPtr<ID3DBlob> GetBlob() { return _blob; }
@@ -46,6 +47,7 @@ public:
 	VertexShader(ComPtr<ID3D11Device> device);
 	~VertexShader();
 
+public:
 	ComPtr<ID3D11VertexShader> GetComPtr() { return _vertexShader; }
 
 	virtual void Create(const std::wstring& path, const std::string& name, const std::string& version) override;
@@ -64,6 +66,7 @@ public:
 	PixelShader(ComPtr<ID3D11Device> device);
 	~PixelShader();
 
+public:
 	ComPtr<ID3D11PixelShader> GetComPtr() { return _pixelShader; }
 
 	virtual void Create(const std::wstring& path, const std::string& name, const std::string& version) override;

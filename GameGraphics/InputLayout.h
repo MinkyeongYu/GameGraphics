@@ -9,6 +9,7 @@ public:
 	InputLayout(ComPtr<ID3D11Device> device);
 	~InputLayout();
 
+public:
 	ComPtr<ID3D11InputLayout> GetComPtr() { return _inputLayout; }
 
 	void Create(const std::vector<D3D11_INPUT_ELEMENT_DESC>& descs, ComPtr<ID3DBlob> blob);

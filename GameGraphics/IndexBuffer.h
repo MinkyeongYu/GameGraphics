@@ -9,6 +9,7 @@ public:
 	IndexBuffer(ComPtr<ID3D11Device> device);
 	~IndexBuffer();
 
+public:
 	ComPtr<ID3D11Buffer> GetComPtr() { return _indexBuffer; }
 	uint32 GetStride() { return _stride; }
 	uint32 GetOffset() { return _offset; }

@@ -8,6 +8,7 @@ public:
 	BlendState(ComPtr<ID3D11Device> device);
 	~BlendState();
 
+public:
 	ComPtr<ID3D11BlendState> GetComPtr() { return _blendState; }
 
 	const float* GetBlendFactor() { return &_blendFactor; }

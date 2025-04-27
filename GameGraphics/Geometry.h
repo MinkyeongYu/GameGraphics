@@ -10,6 +10,7 @@ public:
 	Geometry() {}
 	~Geometry() {}
 
+public:
 	// ------ Vertex -------
 	uint32 GetVertexCount() { return static_cast<uint32>(_vertices.size()); }
 

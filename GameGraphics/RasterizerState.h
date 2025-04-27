@@ -10,6 +10,7 @@ public:
 	RasterizerState(ComPtr<ID3D11Device> device);
 	~RasterizerState();
 
+public:
 	ComPtr<ID3D11RasterizerState> GetComPtr() { return _rasterizerState; }
 
 	/* RasterizerState »ý¼º

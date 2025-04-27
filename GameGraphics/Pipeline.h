@@ -46,6 +46,7 @@ public:
 	Pipeline(ComPtr<ID3D11DeviceContext> deviceContext);
 	~Pipeline();
 
+public:
 	/* UpdatePipeline
 	 * : IA ~ OM 단계까지 PipelineInfo를 기반으로 GPU 상태를 한 번에 설정
 	 */

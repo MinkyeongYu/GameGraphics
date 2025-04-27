@@ -9,6 +9,7 @@ public:
 	VertexBuffer(ComPtr<ID3D11Device> device);
 	~VertexBuffer();
 
+public:
 	ComPtr<ID3D11Buffer> GetComPtr() { return _vertexBuffer; }
 	uint32 GetStride() { return _stride; }
 	uint32 GetOffset() { return _offset; }

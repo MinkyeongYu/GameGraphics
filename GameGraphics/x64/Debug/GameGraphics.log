@@ -3,6 +3,7 @@
   ConstantBuffer.cpp
   Game.cpp
   GameGraphics.cpp
+  GameObject.cpp
   Geometry.cpp
   GeometryHelper.cpp
   Graphics.cpp

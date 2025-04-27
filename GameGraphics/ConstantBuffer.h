@@ -14,6 +14,7 @@ public:
 
 	~ConstantBuffer() {}
 
+public:
 	ComPtr<ID3D11Buffer> GetComPtr() { return _constantBuffer; }
 
 	/* Constant Buffer »ý¼º */
