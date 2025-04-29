@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 /* Geometry
- * : Á¤Á¡(Vertex)°ú ÀÎµ¦½º(Index) µ¥ÀÌÅÍ¸¦ CPU ¸Ş¸ğ¸® »ó¿¡¼­ °ü¸®ÇÏ´Â ÅÛÇÃ¸´ Å¬·¡½º
+ * : ì •ì (Vertex)ê³¼ ì¸ë±ìŠ¤(Index) ë°ì´í„°ë¥¼ CPU ë©”ëª¨ë¦¬ ìƒì—ì„œ ê´€ë¦¬í•˜ëŠ” í…œí”Œë¦¿ í´ë˜ìŠ¤
  */
 template<typename T>
 class Geometry

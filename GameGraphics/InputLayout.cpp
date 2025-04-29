@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "InputLayout.h"
 
 InputLayout::InputLayout(ComPtr<ID3D11Device> device)
@@ -14,10 +14,10 @@ InputLayout::~InputLayout()
 
 void InputLayout::Create(const std::vector<D3D11_INPUT_ELEMENT_DESC>& descs, ComPtr<ID3DBlob> vertexShaderBlob)
 {
-	/* (¹è¿­ / ¿ø¼Ò)·Î ¿ø¼Ò °³¼ö ±¸ÇÏ±â */
+	/* (ë°°ì—´ / ì›ì†Œ)ë¡œ ì›ì†Œ ê°œìˆ˜ êµ¬í•˜ê¸° */
 	const int32 count = static_cast<int32>(descs.size());
 
-	/* ÀÔ·Â ·¹ÀÌ¾Æ¿ô »ı¼º */
+	/* ì…ë ¥ ë ˆì´ì•„ì›ƒ ìƒì„± */
 	_device->CreateInputLayout(
 		descs.data(), count, vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), _inputLayout.GetAddressOf()
 	);

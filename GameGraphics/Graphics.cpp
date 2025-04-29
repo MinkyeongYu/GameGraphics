@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Graphics.h"
 
 Graphics::Graphics(HWND hwnd)
@@ -7,9 +7,9 @@ Graphics::Graphics(HWND hwnd)
 	_width = GWinSizeX;
 	_height = GWinSizeY;
 
-	CreateDeviceAndSwapChain();		// [1] DirectX ÇÙ½É °´Ã¼µé »ı¼º
-	CreateRenderTargetView();		// [2] ¹é¹öÆÛ ±â¹İÀÇ ·»´õ Å¸°Ù ºä »ı¼º
-	SetViewport();					// [3] È­¸é¿¡ Ãâ·ÂÇÒ ºäÆ÷Æ® Å©±â ¼³Á¤
+	CreateDeviceAndSwapChain();		// [1] DirectX í•µì‹¬ ê°ì²´ë“¤ ìƒì„±
+	CreateRenderTargetView();		// [2] ë°±ë²„í¼ ê¸°ë°˜ì˜ ë Œë” íƒ€ê²Ÿ ë·° ìƒì„±
+	SetViewport();					// [3] í™”ë©´ì— ì¶œë ¥í•  ë·°í¬íŠ¸ í¬ê¸° ì„¤ì •
 }
 
 Graphics::~Graphics()
@@ -18,17 +18,17 @@ Graphics::~Graphics()
 
 void Graphics::RenderBegin()
 {
-	/* view °³¼ö, renderTargetView ÁÖ¼Ò, DepthStencilView(ÇÈ¼¿ÀÌ ¾ó¸¶³ª ±íÀÌ ÀÖ´ÂÁö(Z°ª) */
+	/* view ê°œìˆ˜, renderTargetView ì£¼ì†Œ, DepthStencilView(í”½ì…€ì´ ì–¼ë§ˆë‚˜ ê¹Šì´ ìˆëŠ”ì§€(Zê°’) */
 	_deviceContext->OMSetRenderTargets(1, _renderTargetView.GetAddressOf(), nullptr);
-	/* renderTargetView »ö ÃÊ±âÈ­ */
+	/* renderTargetView ìƒ‰ ì´ˆê¸°í™” */
 	_deviceContext->ClearRenderTargetView(_renderTargetView.Get(), _clearColor);
-	/* viewport ¼³Á¤ */
+	/* viewport ì„¤ì • */
 	_deviceContext->RSSetViewports(1, &_viewport);
 }
 
 void Graphics::RenderEnd()
 {
-	/* rendering °á°ú¹°À» Àü¸é¹öÆÛ¿¡ º¹»çÇÑ ÈÄ È­¸é¿¡ Ãâ·Â */
+	/* rendering ê²°ê³¼ë¬¼ì„ ì „ë©´ë²„í¼ì— ë³µì‚¬í•œ í›„ í™”ë©´ì— ì¶œë ¥ */
 	HRESULT hResult = _swapChain->Present(1, 0);
 	CHECK(hResult);
 }
@@ -36,56 +36,56 @@ void Graphics::RenderEnd()
 void Graphics::CreateDeviceAndSwapChain()
 {
 	DXGI_SWAP_CHAIN_DESC desc;
-	// memset°ú °°À½, ¹è¿­ °ª 0À¸·Î ¸ğµÎ ÃÊ±âÈ­
+	// memsetê³¼ ê°™ìŒ, ë°°ì—´ ê°’ 0ìœ¼ë¡œ ëª¨ë‘ ì´ˆê¸°í™”
 	ZeroMemory(&desc, sizeof(desc));
 
 	{
-		/* ¹öÆÛ Å©±â ÃÊ±âÈ­ */
+		/* ë²„í¼ í¬ê¸° ì´ˆê¸°í™” */
 		desc.BufferDesc.Width = _width;
 		desc.BufferDesc.Height = _height;
-		/* È­¸é ÁÖ»çÀ², 1ÃÊ¿¡ È­¸é¿¡ Ç¥½ÃµÇ´Â ÀÌ¹ÌÁö ¼ö. (Numerator = ºĞÀÚ, Denominator = ºĞ¸ğ) */
+		/* í™”ë©´ ì£¼ì‚¬ìœ¨, 1ì´ˆì— í™”ë©´ì— í‘œì‹œë˜ëŠ” ì´ë¯¸ì§€ ìˆ˜. (Numerator = ë¶„ì, Denominator = ë¶„ëª¨) */
 		desc.BufferDesc.RefreshRate.Numerator = 60;
 		desc.BufferDesc.RefreshRate.Denominator = 1;
 		/* Display Format : RGBA 8-bit */
 		desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-		/* ÁÖ»ç¼± ±×¸®±â ¸ğµå unspecified */
+		/* ì£¼ì‚¬ì„  ê·¸ë¦¬ê¸° ëª¨ë“œ unspecified */
 		desc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 		desc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-		/* ÇÈ¼¿´ÜÀ§ °è´ÜÇö»ó º¸°£ ¿É¼Ç, 1ÀÌ¸é MSAA ºñÈ°¼ºÈ­ */
+		/* í”½ì…€ë‹¨ìœ„ ê³„ë‹¨í˜„ìƒ ë³´ê°„ ì˜µì…˜, 1ì´ë©´ MSAA ë¹„í™œì„±í™” */
 		desc.SampleDesc.Count = 1;
 		desc.SampleDesc.Quality = 0;
-		/* ÇØ´ç ¹öÆÛ¸¦ ÃÖÁ¾ °á°ú¹°À» ±×¸®´Â ¿ëµµ·Î »ç¿ë */
+		/* í•´ë‹¹ ë²„í¼ë¥¼ ìµœì¢… ê²°ê³¼ë¬¼ì„ ê·¸ë¦¬ëŠ” ìš©ë„ë¡œ ì‚¬ìš© */
 		desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-		/* ¹é ¹öÆÛ 1°³ »ç¿ë */
+		/* ë°± ë²„í¼ 1ê°œ ì‚¬ìš© */
 		desc.BufferCount = 1;
-		/* Ãâ·Â Ã¢ = _hwnd */
+		/* ì¶œë ¥ ì°½ = _hwnd */
 		desc.OutputWindow = _hwnd;
-		/* Ã¢¸ğµå·Î ½ÇÇà */
+		/* ì°½ëª¨ë“œë¡œ ì‹¤í–‰ */
 		desc.Windowed = TRUE;
-		/* ·»´õ¸µ ³¡³ª°í ÇÁ·¹Á¨Æ®(È­¸é¿¡ º¸¿©ÁÖ±â)ÇÑ ´ÙÀ½, ¹é ¹öÆÛ ³»¿ëÀº ¹ö¸² */
+		/* ë Œë”ë§ ëë‚˜ê³  í”„ë ˆì  íŠ¸(í™”ë©´ì— ë³´ì—¬ì£¼ê¸°)í•œ ë‹¤ìŒ, ë°± ë²„í¼ ë‚´ìš©ì€ ë²„ë¦¼ */
 		desc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	}
 
-	/*	DirectX 11 µğ¹ÙÀÌ½º(Device), µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ®(Context), ½º¿Ò Ã¼ÀÎ(SwapChain) »ı¼º
+	/*	DirectX 11 ë””ë°”ì´ìŠ¤(Device), ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸(Context), ìŠ¤ì™‘ ì²´ì¸(SwapChain) ìƒì„±
 	*
-		D3D_DRIVER_TYPE : hardware (±×·¡ÇÈÄ«µå¸¦ »ç¿ëÇÏ°Ú´Ù),
-		D3D_FEATURE_LEVEL : DX¸î ¹öÀü¿¡ ÇØ´çÇÏ´Â ±â´É Áö¿ø,
+		D3D_DRIVER_TYPE : hardware (ê·¸ë˜í”½ì¹´ë“œë¥¼ ì‚¬ìš©í•˜ê² ë‹¤),
+		D3D_FEATURE_LEVEL : DXëª‡ ë²„ì „ì— í•´ë‹¹í•˜ëŠ” 
 	*/
 	HRESULT hResult = ::D3D11CreateDeviceAndSwapChain(
-		nullptr,							// ±âº» ¾î´ğÅÍ »ç¿ë
-		D3D_DRIVER_TYPE_HARDWARE,			// GPU(ÇÏµå¿ş¾î °¡¼Ó) »ç¿ë
-		nullptr,							// ¼ÒÇÁÆ®¿ş¾î µå¶óÀÌ¹ö ¾øÀ½
-		0,									// ÇÃ·¡±× (µğ¹ö±× ¸ğµå µî)
-		nullptr, 0,							// ÇÇÃ³ ·¹º§ ÀÚµ¿ ¼±ÅÃ (DX11 ¿ì¼±)
-		D3D11_SDK_VERSION,					// SDK ¹öÀü
-		&desc,								// ½º¿Ò Ã¼ÀÎ ¼³Á¤ Á¤º¸
-		_swapChain.GetAddressOf(),			// »ı¼ºµÈ ½º¿Ò Ã¼ÀÎ ÀúÀå
-		_device.GetAddressOf(),				// »ı¼ºµÈ µğ¹ÙÀÌ½º ÀúÀå
-		nullptr,							// ½ÇÁ¦ ¼±ÅÃµÈ ÇÇÃ³ ·¹º§Àº ¹«½Ã
-		_deviceContext.GetAddressOf()		// »ı¼ºµÈ µğ¹ÙÀÌ½º ÄÁÅØ½ºÆ® ÀúÀå
+		nullptr,							// ê¸°ë³¸ ì–´ëŒ‘í„° ì‚¬ìš©
+		D3D_DRIVER_TYPE_HARDWARE,			// GPU(í•˜ë“œì›¨ì–´ ê°€ì†) ì‚¬ìš©
+		nullptr,							// ì†Œí”„íŠ¸ì›¨ì–´ ë“œë¼ì´ë²„ ì—†ìŒ
+		0,									// í”Œë˜ê·¸ (ë””ë²„ê·¸ ëª¨ë“œ ë“±)
+		nullptr, 0,							// í”¼ì²˜ ë ˆë²¨ ìë™ ì„ íƒ (DX11 ìš°ì„ )
+		D3D11_SDK_VERSION,					// SDK ë²„ì „
+		&desc,								// ìŠ¤ì™‘ ì²´ì¸ ì„¤ì • ì •ë³´
+		_swapChain.GetAddressOf(),			// ìƒì„±ëœ ìŠ¤ì™‘ ì²´ì¸ ì €ì¥
+		_device.GetAddressOf(),				// ìƒì„±ëœ ë””ë°”ì´ìŠ¤ ì €ì¥
+		nullptr,							// ì‹¤ì œ ì„ íƒëœ í”¼ì²˜ ë ˆë²¨ì€ ë¬´ì‹œ
+		_deviceContext.GetAddressOf()		// ìƒì„±ëœ ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸ ì €ì¥
 	);
 
-	/* false¶ó¸é crash¹ß»ı½ÃÅ´ assert(SUCCEEDED(hResult))´Â CHECK(hResult). pch¿¡ Á¤ÀÇÇÔ */
+	/* falseë¼ë©´ crashë°œìƒì‹œí‚´ assert(SUCCEEDED(hResult))ëŠ” CHECK(hResult). pchì— ì •ì˜í•¨ */
 	CHECK(hResult);
 }
 
@@ -93,24 +93,24 @@ void Graphics::CreateRenderTargetView()
 {
 	HRESULT hResult;
 	ComPtr<ID3D11Texture2D> backBuffer = nullptr;
-	// _swapChain¿¡¼­ 0¹øÂ° ¹öÆÛ(ID3D11Texture2D)¸¦ ¾ò¾î backBuffer Æ÷ÀÎÅÍ¿¡ ÀúÀå
+	// _swapChainì—ì„œ 0ë²ˆì§¸ ë²„í¼(ID3D11Texture2D)ë¥¼ ì–»ì–´ backBuffer í¬ì¸í„°ì— ì €ì¥
 	hResult = _swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)backBuffer.GetAddressOf());
 	CHECK(hResult);
 
-	// backBuffer¸¦ ±â¹İÀ¸·Î ·»´õ Å¸°Ù ºä »ı¼º ÈÄ _renderTargetView¿¡ ÀúÀå
+	// backBufferë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë Œë” íƒ€ê²Ÿ ë·° ìƒì„± í›„ _renderTargetViewì— ì €ì¥
 	hResult = _device->CreateRenderTargetView(backBuffer.Get(), nullptr, _renderTargetView.GetAddressOf());
 	CHECK(hResult);
 }
 
 void Graphics::SetViewport()
 {
-	/* ½ÃÀÛ À§Ä¡ */
+	/* ì‹œì‘ ìœ„ì¹˜ */
 	_viewport.TopLeftX = 0.f;
 	_viewport.TopLeftY = 0.f;
-	/* ³Êºñ¿Í ³ôÀÌ */
+	/* ë„ˆë¹„ì™€ ë†’ì´ */
 	_viewport.Width = static_cast<float>(_width);
 	_viewport.Height = static_cast<float>(_height);
-	/* ±íÀÌ */
+	/* ê¹Šì´ */
 	_viewport.MinDepth = 0.f;
 	_viewport.MaxDepth = 1.f;
 }

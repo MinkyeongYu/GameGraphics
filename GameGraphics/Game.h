@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 #include "pch.h"
 
 /* Game
- * : °ÔÀÓ ·çÇÁ(Init, Update, Render)¸¦ °ü¸®ÇÏ°í, ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ Àü¹İÀ» ±¸¼ºÇÏ´Â Å¬·¡½º
+ * : ê²Œì„ ë£¨í”„(Init, Update, Render)ë¥¼ ê´€ë¦¬í•˜ê³ , ë Œë”ë§ íŒŒì´í”„ë¼ì¸ ì „ë°˜ì„ êµ¬ì„±í•˜ëŠ” í´ë˜ìŠ¤
  */
 class Game
 {
@@ -19,16 +19,16 @@ private:
 	HWND _hwnd;
 
 	/* Graphics
-	: Device, DeviceContext, SwapChain, RenderTargetView, Viewport »ı¼º */
+	: Device, DeviceContext, SwapChain, RenderTargetView, Viewport ìƒì„± */
 	std::shared_ptr<Graphics> _graphics;
 
 	/* Pipeline
-	 * : ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ »óÅÂ(PipelineInfo)¸¦ ±â¹İÀ¸·Î GPU »óÅÂ¸¦ ¼³Á¤ÇÏ°í, ±×¸®´Â ¿ªÇÒÀ» ÇÏ´Â °´Ã¼
+	 * : ë Œë”ë§ íŒŒì´í”„ë¼ì¸ ìƒíƒœ(PipelineInfo)ë¥¼ ê¸°ë°˜ìœ¼ë¡œ GPU ìƒíƒœë¥¼ ì„¤ì •í•˜ê³ , ê·¸ë¦¬ëŠ” ì—­í• ì„ í•˜ëŠ” ê°ì²´
 	 */
 	std::shared_ptr<Pipeline> _pipeline;
 
 	/* GameObject
-	 * : 3D °ø°£»ó¿¡ ¹èÄ¡µÇ´Â ±âº» °ÔÀÓ ¿ÀºêÁ§Æ® ÀÎ½ºÅÏ½º¸¦ °¡¸®Å°´Â Æ÷ÀÎÅÍ
+	 * : 3D ê³µê°„ìƒì— ë°°ì¹˜ë˜ëŠ” ê¸°ë³¸ ê²Œì„ ì˜¤ë¸Œì íŠ¸ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ê°€ë¦¬í‚¤ëŠ” í¬ì¸í„°
 	 */
 	std::shared_ptr<GameObject> _gameObject;
 };

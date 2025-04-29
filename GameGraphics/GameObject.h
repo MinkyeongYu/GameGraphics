@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "pch.h"
 
 /* GameObject
- * : 3D °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ±¸¼ºÇÏ´Â ±âº» Å¬·¡½º
- *   Á¤Á¡/ÀÎµ¦½º µ¥ÀÌÅÍ, ¹öÆÛ, ¼ÎÀÌ´õ, ÅØ½ºÃ³, ·»´õ¸µ »óÅÂ µîÀ» °ü¸®ÇÏ°í
- *   Update/Render ÇÔ¼ö¸¦ ÅëÇØ ¸Å ÇÁ·¹ÀÓ ¾÷µ¥ÀÌÆ® ¹× ·»´õ¸µÀ» ¼öÇàÇÑ´Ù.
+ * : 3D ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ êµ¬ì„±í•˜ëŠ” ê¸°ë³¸ í´ë˜ìŠ¤
+ *   ì •ì /ì¸ë±ìŠ¤ ë°ì´í„°, ë²„í¼, ì…°ì´ë”, í…ìŠ¤ì²˜, ë Œë”ë§ ìƒíƒœ ë“±ì„ ê´€ë¦¬í•˜ê³ 
+ *   Update/Render í•¨ìˆ˜ë¥¼ í†µí•´ ë§¤ í”„ë ˆì„ ì—…ë°ì´íŠ¸ ë° ë Œë”ë§ì„ ìˆ˜í–‰í•œë‹¤.
  */
 class GameObject
 {
@@ -21,49 +21,49 @@ private:
 
 private:
 	/* 1. Geometry
-	: CPU ¸Ş¸ğ¸® »ó¿¡¼­ Á¤Á¡(Vertex)°ú ÀÎµ¦½º(Index) µ¥ÀÌÅÍ¸¦ °ü¸®ÇÏ´Â °´Ã¼ */
+	: CPU ë©”ëª¨ë¦¬ ìƒì—ì„œ ì •ì (Vertex)ê³¼ ì¸ë±ìŠ¤(Index) ë°ì´í„°ë¥¼ ê´€ë¦¬í•˜ëŠ” ê°ì²´ */
 	std::shared_ptr<Geometry<VertexTextureData>> _geometry;
 
 	/* 2. Vertex Buffer
-	: Á¤Á¡(Vertex) µ¥ÀÌÅÍ¸¦ GPU VRAM¿¡ ¾÷·ÎµåÇÏ°í, IA(Input Assembler) ´Ü°è¿¡¼­ »ç¿ë */
+	: ì •ì (Vertex) ë°ì´í„°ë¥¼ GPU VRAMì— ì—…ë¡œë“œí•˜ê³ , IA(Input Assembler) ë‹¨ê³„ì—ì„œ ì‚¬ìš© */
 	std::shared_ptr<VertexBuffer> _vertexBuffer;
 
 	/* 3. Index Buffer
-	: ÀÎµ¦½º(Index) µ¥ÀÌÅÍ¸¦ GPU VRAM¿¡ ¾÷·ÎµåÇÏ°í, IA(Input Assembler) ´Ü°è¿¡¼­ »ç¿ë */
+	: ì¸ë±ìŠ¤(Index) ë°ì´í„°ë¥¼ GPU VRAMì— ì—…ë¡œë“œí•˜ê³ , IA(Input Assembler) ë‹¨ê³„ì—ì„œ ì‚¬ìš© */
 	std::shared_ptr<IndexBuffer> _indexBuffer;
 
 	/* 4. Input Layout
-	: Á¤Á¡ ¹öÆÛ(Vertex Buffer)ÀÇ µ¥ÀÌÅÍ ±¸Á¶¸¦ GPU(¼ÎÀÌ´õ)¿¡°Ô ¾Ë·ÁÁÖ±â À§ÇÑ °´Ã¼ */
+	: ì •ì  ë²„í¼(Vertex Buffer)ì˜ ë°ì´í„° êµ¬ì¡°ë¥¼ GPU(ì…°ì´ë”)ì—ê²Œ ì•Œë ¤ì£¼ê¸° ìœ„í•œ ê°ì²´ */
 	std::shared_ptr<InputLayout> _inputLayout;
 
 	/* 5. Vertex Shader
-	: Á¤Á¡ º¯È¯ ´Ü°è (¿ùµå/ºä/ÇÁ·ÎÁ§¼Ç Çà·Ä Àû¿ë)¿¡¼­ ½ÇÇàµÇ´Â ¼ÎÀÌ´õ */
+	: ì •ì  ë³€í™˜ ë‹¨ê³„ (ì›”ë“œ/ë·°/í”„ë¡œì ì…˜ í–‰ë ¬ ì ìš©)ì—ì„œ ì‹¤í–‰ë˜ëŠ” ì…°ì´ë” */
 	std::shared_ptr<VertexShader> _vertexShader;
 
 	/* 6. Constant Buffer
-	: IA(Input Assembler) ÀÌÈÄ VS(Vertex Shader)/PS(Pixel Shader) ´Ü°è¿¡¼­ °øÅë µ¥ÀÌÅÍ¸¦ Àü´ŞÇÏ´Â ¿ëµµ */
+	: IA(Input Assembler) ì´í›„ VS(Vertex Shader)/PS(Pixel Shader) ë‹¨ê³„ì—ì„œ ê³µí†µ ë°ì´í„°ë¥¼ ì „ë‹¬í•˜ëŠ” ìš©ë„ */
 	std::shared_ptr<ConstantBuffer<TransformData>> _constantBuffer;
 
 	/* 7. Rasterizer State
-	 * : »ï°¢ÇüÀ» È­¸é¿¡ ¾î¶»°Ô ±×¸±Áö(Ã¤¿ì±â, ÄÃ¸µ µî) ¼³Á¤ÇÏ´Â ·¡½ºÅÍ¶óÀÌÀú »óÅÂ °´Ã¼
+	 * : ì‚¼ê°í˜•ì„ í™”ë©´ì— ì–´ë–»ê²Œ ê·¸ë¦´ì§€(ì±„ìš°ê¸°, ì»¬ë§ ë“±) ì„¤ì •í•˜ëŠ” ë˜ìŠ¤í„°ë¼ì´ì € ìƒíƒœ ê°ì²´
 	 */
 	std::shared_ptr<RasterizerState> _rasterizerState;
 
 	/* 8. Pixel Shader
-	: ÇÈ¼¿ »ö»ó °è»ê ´Ü°è (ÅØ½ºÃ³, ¶óÀÌÆÃ Àû¿ë)¿¡¼­ ½ÇÇàµÇ´Â ¼ÎÀÌ´õ */
+	: í”½ì…€ ìƒ‰ìƒ ê³„ì‚° ë‹¨ê³„ (í…ìŠ¤ì²˜, ë¼ì´íŒ… ì ìš©)ì—ì„œ ì‹¤í–‰ë˜ëŠ” ì…°ì´ë” */
 	std::shared_ptr<PixelShader> _pixelShader;
 
 	/* 9. Shader Resource View
-	: ¼ÎÀÌ´õ(Shader)°¡ GPU ¸®¼Ò½º(ÅØ½ºÃ³, ¹öÆÛ µî)¿¡ Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï ¸¸µé¾îÁÖ´Â °´Ã¼ */
+	: ì…°ì´ë”(Shader)ê°€ GPU ë¦¬ì†ŒìŠ¤(í…ìŠ¤ì²˜, ë²„í¼ ë“±)ì— ì ‘ê·¼í•  ìˆ˜ ìˆë„ë¡ ë§Œë“¤ì–´ì£¼ëŠ” ê°ì²´ */
 	std::shared_ptr<Texture> _shaderResoureView;
 
 	/* 10. Sampler State
-	 * : ÅØ½ºÃ³ ÁÂÇ¥(UV) »ùÇÃ¸µ ¹æ½Ä°ú °æ°è Ã³¸® ¹æ½ÄÀ» Á¤ÀÇÇÏ´Â »ùÇÃ·¯ »óÅÂ °´Ã¼
+	 * : í…ìŠ¤ì²˜ ì¢Œí‘œ(UV) ìƒ˜í”Œë§ ë°©ì‹ê³¼ ê²½ê³„ ì²˜ë¦¬ ë°©ì‹ì„ ì •ì˜í•˜ëŠ” ìƒ˜í”ŒëŸ¬ ìƒíƒœ ê°ì²´
 	 */
 	std::shared_ptr<SamplerState> _samplerState;
 
 	/* 11. Blend State
-	 * : ÇÈ¼¿ »ö»ó È¥ÇÕ(¾ËÆÄ ºí·»µù µî) ¹æ½ÄÀ» Á¤ÀÇÇÏ´Â ºí·»µù »óÅÂ °´Ã¼
+	 * : í”½ì…€ ìƒ‰ìƒ í˜¼í•©(ì•ŒíŒŒ ë¸”ë Œë”© ë“±) ë°©ì‹ì„ ì •ì˜í•˜ëŠ” ë¸”ë Œë”© ìƒíƒœ ê°ì²´
 	 */
 	std::shared_ptr<BlendState> _blendState;
 

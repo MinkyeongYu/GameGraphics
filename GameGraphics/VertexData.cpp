@@ -1,19 +1,19 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "VertexData.h"
 
 
 std::vector<D3D11_INPUT_ELEMENT_DESC> VertexTextureData::descs = 
 {
-	/* Á¤Á¡ À§Ä¡(POSITION): float 3°³ (X, Y, Z), ¿ÀÇÁ¼Â 0ºÎÅÍ ½ÃÀÛ */
+	/* ì •ì  ìœ„ì¹˜(POSITION): float 3ê°œ (X, Y, Z), ì˜¤í”„ì…‹ 0ë¶€í„° ì‹œìž‘ */ 
 	{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-	/*  UV : float 2°³ (R, G), ¿ÀÇÁ¼Â 12ºÎÅÍ ½ÃÀÛ (POSITION µÚ, D3D11_APPEND_ALIGNED_ELEMENT°¡ ¿ÀÇÁ¼ÂÀ» ¾Ë¾Æ¼­ °è»êÇØÁÜ) */
+	/*  UV : float 2ê°œ (R, G), ì˜¤í”„ì…‹ 12ë¶€í„° ì‹œìž‘ (POSITION ë’¤, D3D11_APPEND_ALIGNED_ELEMENTê°€ ì˜¤í”„ì…‹ì„ ì•Œì•„ì„œ ê³„ì‚°í•´ì¤Œ) */
 	{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0}
 };
 
 std::vector<D3D11_INPUT_ELEMENT_DESC> VertexColorData::descs =
 {
-	/* Á¤Á¡ À§Ä¡(POSITION): float 3°³ (X, Y, Z), ¿ÀÇÁ¼Â 0ºÎÅÍ ½ÃÀÛ */
+	/* ì •ì  ìœ„ì¹˜(POSITION): float 3ê°œ (X, Y, Z), ì˜¤í”„ì…‹ 0ë¶€í„° ì‹œìž‘ */
 	{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-	/*  UV : float 4°³ (R, G, B, A), ¿ÀÇÁ¼Â 12ºÎÅÍ ½ÃÀÛ (POSITION µÚ, D3D11_APPEND_ALIGNED_ELEMENT°¡ ¿ÀÇÁ¼ÂÀ» ¾Ë¾Æ¼­ °è»êÇØÁÜ) */
+	/*  UV : float 4ê°œ (R, G, B, A), ì˜¤í”„ì…‹ 12ë¶€í„° ì‹œìž‘ (POSITION ë’¤, D3D11_APPEND_ALIGNED_ELEMENTê°€ ì˜¤í”„ì…‹ì„ ì•Œì•„ì„œ ê³„ì‚°í•´ì¤Œ) */
 	{"COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0}
 };

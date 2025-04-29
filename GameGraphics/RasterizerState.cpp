@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "RasterizerState.h"
 
 RasterizerState::RasterizerState(ComPtr<ID3D11Device> device)
@@ -16,11 +16,11 @@ void RasterizerState::CreateRasterizerState()
 {
 	D3D11_RASTERIZER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
-	// ÇÈ¼¿À» Ã¤¿ì´Â ¹æ½Ä: SOLID(Ã¤¿ì±â) ¶Ç´Â WIREFRAME(¼±¸¸ ±×¸®±â)
+	// í”½ì…€ì„ ì±„ìš°ëŠ” ë°©ì‹: SOLID(ì±„ìš°ê¸°) ë˜ëŠ” WIREFRAME(ì„ ë§Œ ê·¸ë¦¬ê¸°)
 	desc.FillMode = D3D11_FILL_SOLID;
-	// ÄÃ¸µ ¹æ½Ä: BACK(µÚÂÊ ¸é Á¦°Å), FRONT(¾Õ¸é Á¦°Å), NONE(Á¦°Å ¾È ÇÔ)
+	// ì»¬ë§ ë°©ì‹: BACK(ë’¤ìª½ ë©´ ì œê±°), FRONT(ì•žë©´ ì œê±°), NONE(ì œê±° ì•ˆ í•¨)
 	desc.CullMode = D3D11_CULL_BACK;
-	// »ï°¢ÇüÀÇ ¾Õ¸é ½Ã°è¹æÇâ/¹Ý½Ã°è¹æÇâ ¿©ºÎ (false = ½Ã°è¹æÇâÀÌ ¾Õ¸é)
+	// ì‚¼ê°í˜•ì˜ ì•žë©´ ì‹œê³„ë°©í–¥/ë°˜ì‹œê³„ë°©í–¥ ì—¬ë¶€ (false = ì‹œê³„ë°©í–¥ì´ ì•žë©´)
 	desc.FrontCounterClockwise = false;
 
 	HRESULT hResult = _device->CreateRasterizerState(&desc, _rasterizerState.GetAddressOf());

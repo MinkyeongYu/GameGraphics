@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Texture.h"
 
 Texture::Texture(ComPtr<ID3D11Device> device)
@@ -12,15 +12,15 @@ Texture::~Texture()
 
 void Texture::CreateShaderResourceView(const std::wstring& path)
 {
-	// PNG ÀÌ¹ÌÁö ÆÄÀÏ ·Îµå
-	DirectX::TexMetadata md;		// ÅØ½ºÃ³ ¸ŞÅ¸µ¥ÀÌÅÍ (Å©±â, Æ÷¸Ë µî)
-	DirectX::ScratchImage img;		// ÀÌ¹ÌÁö µ¥ÀÌÅÍ¸¦ ÀÓ½Ã ÀúÀåÇÒ °´Ã¼
+	// PNG ì´ë¯¸ì§€ íŒŒì¼ ë¡œë“œ
+	DirectX::TexMetadata md;		// í…ìŠ¤ì²˜ ë©”íƒ€ë°ì´í„° (í¬ê¸°, í¬ë§· ë“±)
+	DirectX::ScratchImage img;		// ì´ë¯¸ì§€ ë°ì´í„°ë¥¼ ì„ì‹œ ì €ì¥í•  ê°ì²´
 
-	// WIC(Windows Imaging Component)¸¦ ÅëÇØ PNG ÆÄÀÏÀ» ÀĞ°í img¿¡ ÀúÀå
+	// WIC(Windows Imaging Component)ë¥¼ í†µí•´ PNG íŒŒì¼ì„ ì½ê³  imgì— ì €ì¥
 	HRESULT hResult = ::LoadFromWICFile(path.c_str(), WIC_FLAGS_NONE, &md, img);
 	CHECK(hResult);
 
-	// ÀĞ¾î¿Â ÀÌ¹ÌÁö µ¥ÀÌÅÍ¸¦ ±â¹İÀ¸·Î Shader Resource View »ı¼º
+	// ì½ì–´ì˜¨ ì´ë¯¸ì§€ ë°ì´í„°ë¥¼ ê¸°ë°˜ìœ¼ë¡œ Shader Resource View ìƒì„±
 	hResult = ::CreateShaderResourceView(_device.Get(), img.GetImages(), img.GetImageCount(), md, _shaderResourceView.GetAddressOf());
 	CHECK(hResult);
 }

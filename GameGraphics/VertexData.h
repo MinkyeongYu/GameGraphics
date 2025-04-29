@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 
-/* Á¤Á¡¿¡ ´ëÇÑ Á¤ÀÇ */
+/* ì •ì ì— ëŒ€í•œ ì •ì˜ */
 
 /* VertexTextureData
- * : Á¤Á¡ÀÇ À§Ä¡(Position)¿Í ÅØ½ºÃ³ ÁÂÇ¥(UV)¸¦ Æ÷ÇÔÇÏ´Â µ¥ÀÌÅÍ ±¸Á¶Ã¼
+ * : ì •ì ì˜ ìœ„ì¹˜(Position)ì™€ í…ìŠ¤ì²˜ ì¢Œí‘œ(UV)ë¥¼ í¬í•¨í•˜ëŠ” ë°ì´í„° êµ¬ì¡°ì²´
  */
 struct VertexTextureData
 {
@@ -13,7 +13,7 @@ struct VertexTextureData
 	static std::vector<D3D11_INPUT_ELEMENT_DESC> descs;
 };
 /* VertexColorData
- * : Á¤Á¡ÀÇ À§Ä¡(Position)¿Í »ö»ó(Color)¸¦ Æ÷ÇÔÇÏ´Â µ¥ÀÌÅÍ ±¸Á¶Ã¼
+ * : ì •ì ì˜ ìœ„ì¹˜(Position)ì™€ ìƒ‰ìƒ(Color)ë¥¼ í¬í•¨í•˜ëŠ” ë°ì´í„° êµ¬ì¡°ì²´
  */
 struct VertexColorData
 {

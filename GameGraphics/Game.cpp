@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Game.h"
 
 Game::Game()
@@ -13,9 +13,9 @@ void Game::Init(HWND hwnd)
 {
 	_hwnd = hwnd;
 
-	// [1] DirectX ÇÙ½É °´Ã¼µé »ı¼º
-	// [2] ¹é¹öÆÛ ±â¹İÀÇ ·»´õ Å¸°Ù ºä »ı¼º
-	// [3] È­¸é¿¡ Ãâ·ÂÇÒ ºäÆ÷Æ® Å©±â ¼³Á¤
+	// [1] DirectX í•µì‹¬ ê°ì²´ë“¤ ìƒì„±
+	// [2] ë°±ë²„í¼ ê¸°ë°˜ì˜ ë Œë” íƒ€ê²Ÿ ë·° ìƒì„±
+	// [3] í™”ë©´ì— ì¶œë ¥í•  ë·°í¬íŠ¸ í¬ê¸° ì„¤ì •
 	_graphics = std::make_shared<Graphics>(hwnd);
 	_pipeline = std::make_shared<Pipeline>(_graphics->GetDeviceContext());
 	_gameObject = std::make_shared<GameObject>(_graphics->GetDevice(), _graphics->GetDeviceContext());
@@ -28,13 +28,13 @@ void Game::Update()
 
 void Game::Render()
 {
-	/* ·£´õ¸µ ½ÃÀÛ */
+	/* ëœë”ë§ ì‹œì‘ */
 	_graphics->RenderBegin();
 
 	{
 		_gameObject->Render(_pipeline);
 	}
 
-	/* ·£´õ¸µ ³¡, È­¸é¿¡ Ãâ·Â */
+	/* ëœë”ë§ ë, í™”ë©´ì— ì¶œë ¥ */
 	_graphics->RenderEnd();
 }

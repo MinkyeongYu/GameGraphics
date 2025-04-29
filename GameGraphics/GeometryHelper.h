@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 #include "VertexData.h" 
 #include "Geometry.h"
 
 /* GeometryHelper
- * : »ç°¢Çü(Rectangle) µî °£´ÜÇÑ ±âÇÏ µµÇüÀ» »ı¼ºÇØÁÖ´Â ÇïÆÛ Å¬·¡½º
+ * : ì‚¬ê°í˜•(Rectangle) ë“± ê°„ë‹¨í•œ ê¸°í•˜ ë„í˜•ì„ ìƒì„±í•´ì£¼ëŠ” í—¬í¼ í´ë˜ìŠ¤
  */
 class GeometryHelper
 {

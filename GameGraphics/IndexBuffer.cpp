@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "IndexBuffer.h"
 
 IndexBuffer::IndexBuffer(ComPtr<ID3D11Device> device)
@@ -19,19 +19,19 @@ void IndexBuffer::Create(std::vector<uint32> indices)
 
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
-	/* GPU¸¸ ÀĞÀ» ¼ö ÀÖÀ½. CPU Á¢±Ù ºÒ°¡ */
+	/* GPUë§Œ ì½ì„ ìˆ˜ ìˆìŒ. CPU ì ‘ê·¼ ë¶ˆê°€ */
 	desc.Usage = D3D11_USAGE_IMMUTABLE;
-	/* Index Buffer ¹ÙÀÎµù ¿ëµµ·Î »ç¿ë */
+	/* Index Buffer ë°”ì¸ë”© ìš©ë„ë¡œ ì‚¬ìš© */
 	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	/* uint32 Å©±â * ÀÎµ¦½º °³¼ö */
+	/* uint32 í¬ê¸° * ì¸ë±ìŠ¤ ê°œìˆ˜ */
 	desc.ByteWidth = static_cast<uint32>(_stride * _count);
 
 	D3D11_SUBRESOURCE_DATA data;
 	ZeroMemory(&data, sizeof(data));
-	/* Ã¹¹øÂ° data ½ÃÀÛÁÖ¼Ò, _indices.data()·Î ´ëÃ¼ °¡´É */
+	/* ì²«ë²ˆì§¸ data ì‹œì‘ì£¼ì†Œ, _indices.data()ë¡œ ëŒ€ì²´ ê°€ëŠ¥ */
 	data.pSysMem = &indices[0];
 
-	// desc¿Í data¸¦ ±â¹İÀ¸·Î ¹öÆÛ »ı¼º ÈÄ _vertexBuffer¿¡ ÀúÀå
+	// descì™€ dataë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë²„í¼ ìƒì„± í›„ _vertexBufferì— ì €ì¥
 	HRESULT hResult = _device->CreateBuffer(&desc, &data, _indexBuffer.GetAddressOf());
 	CHECK(hResult);
 }

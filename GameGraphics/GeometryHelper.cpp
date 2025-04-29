@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "GeometryHelper.h"
 
 void GeometryHelper::CreateRectangle(std::shared_ptr<Geometry<VertexColorData>> geometry, Color color)
@@ -6,7 +6,7 @@ void GeometryHelper::CreateRectangle(std::shared_ptr<Geometry<VertexColorData>> 
 	/* Vertex Data */
 	std::vector<VertexColorData> vertices;
 
-	/*	»ç°¢ÇüÀÌ´Ï±î Á¤Á¡ 4°³, »ç°¢ÇüÀÇ Á¤Á¡ ±¸¼ºµµ
+	/*	ì‚¬ê°í˜•ì´ë‹ˆê¹Œ ì •ì  4ê°œ, ì‚¬ê°í˜•ì˜ ì •ì  êµ¬ì„±ë„
 	*	1  3
 	*	0  2
 	*/
@@ -27,8 +27,8 @@ void GeometryHelper::CreateRectangle(std::shared_ptr<Geometry<VertexColorData>> 
 	geometry->SetVertices(vertices);
 
 	/* Index Data */
-	// »ï°¢Çü 1 : _vertices[0], _vertices[1], _vertices[2]
-	// »ï°¢Çü 2 : _vertices[2], _vertices[1], _vertices[3]
+	// ì‚¼ê°í˜• 1 : _vertices[0], _vertices[1], _vertices[2]
+	// ì‚¼ê°í˜• 2 : _vertices[2], _vertices[1], _vertices[3]
 	std::vector<uint32> indices = {
 		0, 1, 2,
 		2, 1, 3
@@ -42,7 +42,7 @@ void GeometryHelper::CreateRectangle(std::shared_ptr<Geometry<VertexTextureData>
 	/* Vertex Data */
 	std::vector<VertexTextureData> vertices;
 
-	/*	»ç°¢ÇüÀÌ´Ï±î Á¤Á¡ 4°³, »ç°¢ÇüÀÇ Á¤Á¡ ±¸¼ºµµ
+	/*	ì‚¬ê°í˜•ì´ë‹ˆê¹Œ ì •ì  4ê°œ, ì‚¬ê°í˜•ì˜ ì •ì  êµ¬ì„±ë„
 	*	1  3
 	*	0  2
 	*/
@@ -63,8 +63,8 @@ void GeometryHelper::CreateRectangle(std::shared_ptr<Geometry<VertexTextureData>
 	geometry->SetVertices(vertices);
 
 	/* Index Data */
-	// »ï°¢Çü 1 : _vertices[0], _vertices[1], _vertices[2]
-	// »ï°¢Çü 2 : _vertices[2], _vertices[1], _vertices[3]
+	// ì‚¼ê°í˜• 1 : _vertices[0], _vertices[1], _vertices[2]
+	// ì‚¼ê°í˜• 2 : _vertices[2], _vertices[1], _vertices[3]
 	std::vector<uint32> indices = {
 		0, 1, 2,
 		2, 1, 3

@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "BlendState.h"
 
 BlendState::BlendState(ComPtr<ID3D11Device> device)
@@ -19,16 +19,16 @@ void BlendState::CreateBlendState(D3D11_RENDER_TARGET_BLEND_DESC blendDesc, floa
 	D3D11_BLEND_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 
-	// ¸ÖÆ¼ »ùÇÃ¸µ ½Ã ¾ËÆÄ Ä¿¹ö¸®Áö »ç¿ë ¿©ºÎ (ÀÏ¹ÝÀûÀ¸·Î false)
+	// ë©€í‹° ìƒ˜í”Œë§ ì‹œ ì•ŒíŒŒ ì»¤ë²„ë¦¬ì§€ ì‚¬ìš© ì—¬ë¶€ (ì¼ë°˜ì ìœ¼ë¡œ false)
 	desc.AlphaToCoverageEnable = false;
 
-	// MRT(Multiple Render Targets) °¢°¢¿¡ ´Ù¸¥ ºí·»µå ¼³Á¤À» ÇÒÁö ¿©ºÎ (false = µ¿ÀÏ ¼³Á¤ »ç¿ë)
+	// MRT(Multiple Render Targets) ê°ê°ì— ë‹¤ë¥¸ ë¸”ë Œë“œ ì„¤ì •ì„ í• ì§€ ì—¬ë¶€ (false = ë™ì¼ ì„¤ì • ì‚¬ìš©)
 	desc.IndependentBlendEnable = false;
 
-	// ·»´õ Å¸°Ù 0¹ø ºí·»µù ¼³Á¤
+	// ë Œë” íƒ€ê²Ÿ 0ë²ˆ ë¸”ë Œë”© ì„¤ì •
 	desc.RenderTarget[0] = blendDesc;								
 
-	// À§ ¼³Á¤À» ±â¹ÝÀ¸·Î BlendState »ý¼º
+	// ìœ„ ì„¤ì •ì„ ê¸°ë°˜ìœ¼ë¡œ BlendState ìƒì„±
 	HRESULT hResult = _device->CreateBlendState(&desc, _blendState.GetAddressOf());
 	CHECK(hResult);
 }

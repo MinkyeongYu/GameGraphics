@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Shader.h"
 
 Shader::Shader(ComPtr<ID3D11Device> device)
@@ -20,15 +20,15 @@ void Shader::LoadShaderFromFile(const std::wstring& path, const std::string& nam
 	const uint32 comileFlag = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 
 	HRESULT hResult = ::D3DCompileFromFile(
-		path.c_str(),								// path: HLSL ¼ÎÀÌ´õ ÆÄÀÏ °æ·Î
-		nullptr,									// pDefines: ¼ÎÀÌ´õ ÀüÃ³¸® ¸ÅÅ©·Î (»ç¿ë ¾È ÇÔ)
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,			// pInclude: #include Çã¿ë (·ÎÄÃ ÆÄÀÏ Æ÷ÇÔ °¡´É)
-		name.c_str(),								// entryPoint: ¼ÎÀÌ´õ ÁøÀÔ ÁöÁ¡ ÇÔ¼ö ÀÌ¸§ (¿¹: "main")
-		version.c_str(),							// target: ¼ÎÀÌ´õ ¸ðµ¨ (¿¹: "vs_5_0", "ps_5_0")
-		comileFlag,									// Flags1: ÄÄÆÄÀÏ ¿É¼Ç (µð¹ö±×¿ë ÇÃ·¡±× »ç¿ë)
-		0,											// Flags2: °íÁ¤°ª (»ç¿ë ¾È ÇÔ)
-		_blob.GetAddressOf(),						// ppCode: ÄÄÆÄÀÏ °á°ú(ID3DBlob)¸¦ ÀúÀåÇÒ Æ÷ÀÎÅÍ
-		nullptr										// ppErrorMsgs: ¿¡·¯ ¸Þ½ÃÁö Blob (»ç¿ë ¾È ÇÔ)
+		path.c_str(),								// path: HLSL ì…°ì´ë” íŒŒì¼ ê²½ë¡œ
+		nullptr,									// pDefines: ì…°ì´ë” ì „ì²˜ë¦¬ ë§¤í¬ë¡œ (ì‚¬ìš© ì•ˆ í•¨)
+		D3D_COMPILE_STANDARD_FILE_INCLUDE,			// pInclude: #include í—ˆìš© (ë¡œì»¬ íŒŒì¼ í¬í•¨ ê°€ëŠ¥)
+		name.c_str(),								// entryPoint: ì…°ì´ë” ì§„ìž… ì§€ì  í•¨ìˆ˜ ì´ë¦„ (ì˜ˆ: "main")
+		version.c_str(),							// target: ì…°ì´ë” ëª¨ë¸ (ì˜ˆ: "vs_5_0", "ps_5_0")
+		comileFlag,									// Flags1: ì»´íŒŒì¼ ì˜µì…˜ (ë””ë²„ê·¸ìš© í”Œëž˜ê·¸ ì‚¬ìš©)
+		0,											// Flags2: ê³ ì •ê°’ (ì‚¬ìš© ì•ˆ í•¨)
+		_blob.GetAddressOf(),						// ppCode: ì»´íŒŒì¼ ê²°ê³¼(ID3DBlob)ë¥¼ ì €ìž¥í•  í¬ì¸í„°
+		nullptr										// ppErrorMsgs: ì—ëŸ¬ ë©”ì‹œì§€ Blob (ì‚¬ìš© ì•ˆ í•¨)
 	);
 	CHECK(hResult);
 }
@@ -44,10 +44,10 @@ VertexShader::~VertexShader()
 
 void VertexShader::Create(const std::wstring& path, const std::string& name, const std::string& version)
 {
-	/* vertex shader load ÈÄ _vertexBlob¿¡ °á°ú ÀúÀå */
+	/* vertex shader load í›„ _vertexBlobì— ê²°ê³¼ ì €ìž¥ */
 	LoadShaderFromFile(path, name, version);
 
-	/* »ý¼ºµÈ _vertexBlob Á¤º¸¸¦ ÅëÇØ _vertexShader »ý¼º */
+	/* ìƒì„±ëœ _vertexBlob ì •ë³´ë¥¼ í†µí•´ _vertexShader ìƒì„± */
 	HRESULT hResult = _device->CreateVertexShader(
 		_blob->GetBufferPointer(),
 		_blob->GetBufferSize(),
@@ -68,10 +68,10 @@ PixelShader::~PixelShader()
 
 void PixelShader::Create(const std::wstring& path, const std::string& name, const std::string& version)
 {
-	/* pixel shader load ÈÄ _pixelBlob¿¡ °á°ú ÀúÀå */
+	/* pixel shader load í›„ _pixelBlobì— ê²°ê³¼ ì €ìž¥ */
 	LoadShaderFromFile(path, name, version);
 
-	/* »ý¼ºµÈ _pixelBlob Á¤º¸¸¦ ÅëÇØ _pixelShader »ý¼º */
+	/* ìƒì„±ëœ _pixelBlob ì •ë³´ë¥¼ í†µí•´ _pixelShader ìƒì„± */
 	HRESULT hResult = _device->CreatePixelShader(
 		_blob->GetBufferPointer(),
 		_blob->GetBufferSize(),

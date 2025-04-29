@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 /* Graphics
- * : Device, DeviceContext, SwapChain, RenderTargetView, Viewport µîÀ» »ý¼º ¹× °ü¸®ÇÏ´Â Å¬·¡½º
+ * : Device, DeviceContext, SwapChain, RenderTargetView, Viewport ë“±ì„ ìƒì„± ë° ê´€ë¦¬í•˜ëŠ” í´ëž˜ìŠ¤
  */
 class Graphics
 {
@@ -14,11 +14,11 @@ public:
 	void RenderEnd();
 
 public:
-	/* °á°ú¹°À» ±×¸± ¹é ¹öÆÛ »ý¼º */
+	/* ê²°ê³¼ë¬¼ì„ ê·¸ë¦´ ë°± ë²„í¼ ìƒì„± */
 	void CreateDeviceAndSwapChain();
-	/* ¹é ÆÛ¹ö¿¡ ´ëÇÑ Æ÷ÀÎÅÍ, GPU°¡ ¸ñÇ¥ ¹öÆÛ¿¡ Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï ÇØÁÖ´Â ·£´õÅ¸°Ù ºä °´Ã¼ »ý¼º */
+	/* ë°± í¼ë²„ì— ëŒ€í•œ í¬ì¸í„°, GPUê°€ ëª©í‘œ ë²„í¼ì— ì ‘ê·¼í•  ìˆ˜ ìžˆë„ë¡ í•´ì£¼ëŠ” ëžœë”íƒ€ê²Ÿ ë·° ê°ì²´ ìƒì„± */
 	void CreateRenderTargetView();
-	/* viewport ¼³Á¤*/
+	/* viewport ì„¤ì •*/
 	void SetViewport();
 
 public:
@@ -32,23 +32,23 @@ private:
 
 private:
 	/* DirectX */
-	// ComPtrÀ» »ç¿ëÇÏ¸é ref count ½Å°æ¾²Áö ¾Ê¾Æµµ ¾Ë¾Æ¼­ °ü¸®µÊ, wrl¿¡ Æ÷ÇÔµÊ
-	// ID3D11Device : µð¹ÙÀÌ½º ÀÎÅÍÆäÀÌ½º, Áö¿ø Á¡°Ë°ú ÀÚ¿ø ÇÒ´ç¿¡ »ç¿ëµÊ, unit »ý¼º
-	// ID3D11DeviceContext : ·»´õ¸µ ¸í·ÉÀ» »ý¼ºÇÏ´Â µð¹ÙÀÌ½º ÄÁÅØ½ºÆ®, unit¿¡ ¸í·É
+	// ComPtrì„ ì‚¬ìš©í•˜ë©´ ref count ì‹ ê²½ì“°ì§€ ì•Šì•„ë„ ì•Œì•„ì„œ ê´€ë¦¬ë¨, wrlì— í¬í•¨ë¨
+	// ID3D11Device : ë””ë°”ì´ìŠ¤ ì¸í„°íŽ˜ì´ìŠ¤, ì§€ì› ì ê²€ê³¼ ìžì› í• ë‹¹ì— ì‚¬ìš©ë¨, unit ìƒì„±
+	// ID3D11DeviceContext : ë Œë”ë§ ëª…ë ¹ì„ ìƒì„±í•˜ëŠ” ë””ë°”ì´ìŠ¤ ì»¨í…ìŠ¤íŠ¸, unitì— ëª…ë ¹
 	ComPtr<ID3D11Device> _device = nullptr;
 	ComPtr<ID3D11DeviceContext> _deviceContext = nullptr;
 
-	// SwapChain : ·»´õ¸µµÈ µ¥ÀÌÅÍ¸¦ Ãâ·Â¿¡ Ç¥½ÃÇÏ±â Àü¿¡ ÀúÀåÇÏ±â À§ÇØ ÇÏ³ª ÀÌ»óÀÇ Ç¥¸éÀ» ±¸Çö
+	// SwapChain : ë Œë”ë§ëœ ë°ì´í„°ë¥¼ ì¶œë ¥ì— í‘œì‹œí•˜ê¸° ì „ì— ì €ìž¥í•˜ê¸° ìœ„í•´ í•˜ë‚˜ ì´ìƒì˜ í‘œë©´ì„ êµ¬í˜„
 	ComPtr<IDXGISwapChain> _swapChain = nullptr;
 
 	/* RenderTarget View
-		: GPU°¡ ¹é ¹öÆÛ¸¦ ·»´õ¸µ ´ë»ó(Target)À¸·Î ÀÎ½ÄÇÏ°í,
-		  ÇØ´ç ¹öÆÛ¿¡ ±×¸²À» ±×¸± ¼ö ÀÖµµ·Ï ¿¬°áÇØÁÖ´Â ºä(View) °´Ã¼ */
+		: GPUê°€ ë°± ë²„í¼ë¥¼ ë Œë”ë§ ëŒ€ìƒ(Target)ìœ¼ë¡œ ì¸ì‹í•˜ê³ ,
+		  í•´ë‹¹ ë²„í¼ì— ê·¸ë¦¼ì„ ê·¸ë¦´ ìˆ˜ ìžˆë„ë¡ ì—°ê²°í•´ì£¼ëŠ” ë·°(View) ê°ì²´ */
 	ComPtr<ID3D11RenderTargetView> _renderTargetView;
 
-	/* Misc : Àâ´ÙÇÑ °Íµé */
-	// D3D11_VIEWPORT : È­¸éÀ» ¹¦»çÇÏ´Â ±¸Á¶Ã¼
+	/* Misc : ìž¡ë‹¤í•œ ê²ƒë“¤ */
+	// D3D11_VIEWPORT : í™”ë©´ì„ ë¬˜ì‚¬í•˜ëŠ” êµ¬ì¡°ì²´
 	D3D11_VIEWPORT _viewport = { 0 };
-	// ºÐÈ«»ö
+	// ë¶„í™ìƒ‰
 	float _clearColor[4] = { 1.0f, 0.576f, 0.674f, 0.5f };
 };

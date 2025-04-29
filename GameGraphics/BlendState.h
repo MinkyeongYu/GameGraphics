@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
-/*	Blend State °´Ã¼
-	: ÇÈ¼¿ »ö»ó È¥ÇÕ ¹æ½Ä ¼³Á¤: ¾ËÆÄ ºí·»µù µî */
+/*	Blend State ê°ì²´
+	: í”½ì…€ ìƒ‰ìƒ í˜¼í•© ë°©ì‹ ì„¤ì •: ì•ŒíŒŒ ë¸”ë Œë”© ë“± */
 class BlendState
 {
 public:
@@ -14,9 +14,9 @@ public:
 	const float* GetBlendFactor() { return &_blendFactor; }
 	uint32 GetSampleMask() { return _sampleMask; }
 
-	/* Blend State »ı¼º
-   - ÇÈ¼¿ÀÌ ·»´õ Å¸°Ù¿¡ Ãâ·ÂµÉ ¶§, ±âÁ¸ ÇÈ¼¿°ú »õ ÇÈ¼¿À» ¾î¶»°Ô ¼¯À»Áö ¼³Á¤
-	 (Åõ¸íµµ, ¾ËÆÄ ºí·»µù µî Ã³¸® ¹æ½Ä) */
+	/* Blend State ìƒì„±
+   - í”½ì…€ì´ ë Œë” íƒ€ê²Ÿì— ì¶œë ¥ë  ë•Œ, ê¸°ì¡´ í”½ì…€ê³¼ ìƒˆ í”½ì…€ì„ ì–´ë–»ê²Œ ì„ì„ì§€ ì„¤ì •
+	 (íˆ¬ëª…ë„, ì•ŒíŒŒ ë¸”ë Œë”© ë“± ì²˜ë¦¬ ë°©ì‹) */
 	void CreateBlendState(D3D11_RENDER_TARGET_BLEND_DESC blendDesc =
 		{
 			true,

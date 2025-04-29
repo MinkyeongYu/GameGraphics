@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 /*	Constant Buffer:
-*	: CPU°¡ ¾²°í, GPU°¡ ÀĞ´Â ¿ëµµ·Î, ÀÚÁÖ ¾÷µ¥ÀÌÆ®µÇ´Â µ¥ÀÌÅÍ(ex: ¿ùµåÇà·Ä, ºäÇà·Ä µî)¸¦ GPU¿¡ ºü¸£°Ô ³Ñ±â±â À§ÇØ »ç¿ëÇÏ´Â ¹öÆÛ
+*	: CPUê°€ ì“°ê³ , GPUê°€ ì½ëŠ” ìš©ë„ë¡œ, ìì£¼ ì—…ë°ì´íŠ¸ë˜ëŠ” ë°ì´í„°(ex: ì›”ë“œí–‰ë ¬, ë·°í–‰ë ¬ ë“±)ë¥¼ GPUì— ë¹ ë¥´ê²Œ ë„˜ê¸°ê¸° ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ë²„í¼
 */
 template <typename T>
 class ConstantBuffer
@@ -17,40 +17,40 @@ public:
 public:
 	ComPtr<ID3D11Buffer> GetComPtr() { return _constantBuffer; }
 
-	/* Constant Buffer »ı¼º */
+	/* Constant Buffer ìƒì„± */
 	void CreateConstantBuffer()
 	{
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(desc));
 
-		// CPU ¾²±â °¡´É, GPU ÀĞ±â °¡´É (¸Å ÇÁ·¹ÀÓ¸¶´Ù CPU¿¡¼­ ¾÷µ¥ÀÌÆ® ÇÒ °æ¿ì)
+		// CPU ì“°ê¸° ê°€ëŠ¥, GPU ì½ê¸° ê°€ëŠ¥ (ë§¤ í”„ë ˆì„ë§ˆë‹¤ CPUì—ì„œ ì—…ë°ì´íŠ¸ í•  ê²½ìš°)
 		desc.Usage = D3D11_USAGE_DYNAMIC;
 		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		desc.ByteWidth = sizeof(T);
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-		// ¼³Á¤µÈ desc¸¦ ±â¹İÀ¸·Î GPU¿¡ Constant Buffer »ı¼º ÈÄ _constantBuffer¿¡ ÀúÀå
+		// ì„¤ì •ëœ descë¥¼ ê¸°ë°˜ìœ¼ë¡œ GPUì— Constant Buffer ìƒì„± í›„ _constantBufferì— ì €ì¥
 		HRESULT hResult = _device->CreateBuffer(&desc, nullptr, _constantBuffer.GetAddressOf());
 		CHECK(hResult);
 	}
 
-	/* Map, UnMap ÇÔ¼ö, ¹öÆÛ¿¡ Data º¹»ç */
+	/* Map, UnMap í•¨ìˆ˜, ë²„í¼ì— Data ë³µì‚¬ */
 	void CopyData(const T& data)
 	{
 		D3D11_MAPPED_SUBRESOURCE subResource;
 		ZeroMemory(&subResource, sizeof(subResource));
 
-		// GPUÀÇ Constant Buffer¸¦ CPU¿¡¼­ ¾²±â À§ÇÑ Á¢±Ù ¿äÃ»
+		// GPUì˜ Constant Bufferë¥¼ CPUì—ì„œ ì“°ê¸° ìœ„í•œ ì ‘ê·¼ ìš”ì²­
 		_deviceContext->Map(
-			_constantBuffer.Get(),			// ¾÷µ¥ÀÌÆ®ÇÒ Constant Buffer
-			0,								// ¼­ºê¸®¼Ò½º ÀÎµ¦½º (ÀÏ¹İÀûÀ¸·Î 0)
-			D3D11_MAP_WRITE_DISCARD,		// ÀÌÀü ³»¿ëÀº ¹ö¸®°í »õ·Î ¾²±â (°¡Àå ÀÏ¹İÀûÀÎ ¹æ½Ä)
-			0,								// Reserved (Ç×»ó 0)
-			&subResource					// ¸ÅÇÎ °á°ú¸¦ ¹ŞÀ» ±¸Á¶Ã¼ (CPU°¡ Á¢±Ù °¡´ÉÇÑ Æ÷ÀÎÅÍ Á¦°øµÊ)
+			_constantBuffer.Get(),			// ì—…ë°ì´íŠ¸í•  Constant Buffer
+			0,								// ì„œë¸Œë¦¬ì†ŒìŠ¤ ì¸ë±ìŠ¤ (ì¼ë°˜ì ìœ¼ë¡œ 0)
+			D3D11_MAP_WRITE_DISCARD,		// ì´ì „ ë‚´ìš©ì€ ë²„ë¦¬ê³  ìƒˆë¡œ ì“°ê¸° (ê°€ì¥ ì¼ë°˜ì ì¸ ë°©ì‹)
+			0,								// Reserved (í•­ìƒ 0)
+			&subResource					// ë§¤í•‘ ê²°ê³¼ë¥¼ ë°›ì„ êµ¬ì¡°ì²´ (CPUê°€ ì ‘ê·¼ ê°€ëŠ¥í•œ í¬ì¸í„° ì œê³µë¨)
 		);
-		// _transformData°ªÀ» GPU¸Ş¸ğ¸®·Î º¹»çÇÑ ÈÄ, GPUÀÇ Constant Buffer¿¡ ¾÷·Îµå
+		// _transformDataê°’ì„ GPUë©”ëª¨ë¦¬ë¡œ ë³µì‚¬í•œ í›„, GPUì˜ Constant Bufferì— ì—…ë¡œë“œ
 		::memcpy(subResource.pData, &data, sizeof(data));
-		// ¸ÊÇÎ ÇØÁ¦ ¡æ GPU¿¡¼­ ÀĞÀ» ¼ö ÀÖµµ·Ï ´Ù½Ã ¿¬°á
+		// ë§µí•‘ í•´ì œ â†’ GPUì—ì„œ ì½ì„ ìˆ˜ ìˆë„ë¡ ë‹¤ì‹œ ì—°ê²°
 		_deviceContext->Unmap(_constantBuffer.Get(), 0);
 	}
 

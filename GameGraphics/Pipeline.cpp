@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Pipeline.h"
 
 Pipeline::Pipeline(ComPtr<ID3D11DeviceContext> deviceContext)
@@ -16,32 +16,32 @@ void Pipeline::UpdatePipeline(PipelineInfo info)
 {
 	/* IA - VS - RS - PS - OM */
 	{
-		// IA (Input Assembler) : Á¤Á¡ÀÇ Á¤º¸ Àü´Þ
-		/* GPU¿¡°Ô Á¤Á¡ µ¥ÀÌÅÍÀÇ ±¸Á¶ Àü´Þ */
+		// IA (Input Assembler) : ì •ì ì˜ ì •ë³´ ì „ë‹¬
+		/* GPUì—ê²Œ ì •ì  ë°ì´í„°ì˜ êµ¬ì¡° ì „ë‹¬ */
 		_deviceContext->IASetInputLayout(info._inputLayout->GetComPtr().Get());
-		/* °¢ Á¤Á¡À» ¾î¶»°Ô ÀÌ¾îÁÙÁö Àü´Þ, »ï°¢ÇüÀ¸·Î ÀÌ¾îÁÖµµ·Ï ¼³Á¤ */
+		/* ê° ì •ì ì„ ì–´ë–»ê²Œ ì´ì–´ì¤„ì§€ ì „ë‹¬, ì‚¼ê°í˜•ìœ¼ë¡œ ì´ì–´ì£¼ë„ë¡ ì„¤ì • */
 		_deviceContext->IASetPrimitiveTopology(info.topology);
 
-		// VS (Vertex Shader) : Á¤Á¡ÀÇ À§Ä¡/»ö»ó µî °¡°ø
+		// VS (Vertex Shader) : ì •ì ì˜ ìœ„ì¹˜/ìƒ‰ìƒ ë“± ê°€ê³µ
 		if (info._vertexShader)
 		{
 			_deviceContext->VSSetShader(info._vertexShader->GetComPtr().Get(), nullptr, 0);
 		}
 
-		// RS (Rasterizer) : Á¤Á¡ ¡æ ÇÈ¼¿·Î »ï°¢Çü ±×¸®±â
-		/* Draw()È£Ãâ ½Ã ³»ºÎÀûÀ¸·Î GPU°¡ ÀÚµ¿À¸·Î Rasterizer ½ÇÇàÇÔ */
+		// RS (Rasterizer) : ì •ì  â†’ í”½ì…€ë¡œ ì‚¼ê°í˜• ê·¸ë¦¬ê¸°
+		/* Draw()í˜¸ì¶œ ì‹œ ë‚´ë¶€ì ìœ¼ë¡œ GPUê°€ ìžë™ìœ¼ë¡œ Rasterizer ì‹¤í–‰í•¨ */
 		if (info._rasterizerState)
 		{
 			_deviceContext->RSSetState(info._rasterizerState->GetComPtr().Get());
 		}
 
-		// PS (Pixel Shader) : ÇÈ¼¿ ´ÜÀ§ »ö»ó Ã³¸®
+		// PS (Pixel Shader) : í”½ì…€ ë‹¨ìœ„ ìƒ‰ìƒ ì²˜ë¦¬
 		if (info._pixelShader)
 		{
 			_deviceContext->PSSetShader(info._pixelShader->GetComPtr().Get(), nullptr, 0);
 		}
 
-		// OM (Output Merger) : ÃÖÁ¾ ÇÈ¼¿À» ·»´õ Å¸°Ù¿¡ Ãâ·Â
+		// OM (Output Merger) : ìµœì¢… í”½ì…€ì„ ë Œë” íƒ€ê²Ÿì— ì¶œë ¥
 		if (info._blendState)
 		{
 			_deviceContext->OMSetBlendState(info._blendState->GetComPtr().Get(), info._blendState->GetBlendFactor(), info._blendState->GetSampleMask());
@@ -53,13 +53,13 @@ void Pipeline::SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer)
 {
 	uint32 stride = buffer->GetStride();
 	uint32 offset = buffer->GetOffset();
-	/* GPU¿¡°Ô Á¤Á¡ ¹öÆÛÀÇ Å©±â¿Í À§Ä¡(stride, offset) Àü´Þ, vertices »ç¿ëÇÔÀ» GPU¿¡ ¾Ë·ÁÁÜ */
+	/* GPUì—ê²Œ ì •ì  ë²„í¼ì˜ í¬ê¸°ì™€ ìœ„ì¹˜(stride, offset) ì „ë‹¬, vertices ì‚¬ìš©í•¨ì„ GPUì— ì•Œë ¤ì¤Œ */
 	_deviceContext->IASetVertexBuffers(0, 1, buffer->GetComPtr().GetAddressOf(), &stride, &offset);
 }
 
 void Pipeline::SetIndexBuffer(std::shared_ptr<IndexBuffer> buffer)
 {
-	/* 32-bit(4Byte) uint ÀÎµ¦½º ¹öÆÛ GPU¿¡ ¹ÙÀÎµù */
+	/* 32-bit(4Byte) uint ì¸ë±ìŠ¤ ë²„í¼ GPUì— ë°”ì¸ë”© */
 	_deviceContext->IASetIndexBuffer(buffer->GetComPtr().Get(), DXGI_FORMAT_R32_UINT, 0);
 }
 
@@ -89,7 +89,7 @@ void Pipeline::SetSamplerState(uint32 slot, uint32 scope, std::shared_ptr<Sample
 
 void Pipeline::Draw(uint32 vertexCount, uint32 startVertexLocation)
 {
-	/* ½ÇÁ¦ »ï°¢Çü ±×¸®±â (Á¤Á¡ °³¼ö 3, ½ÃÀÛ offset 0) */
+	/* ì‹¤ì œ ì‚¼ê°í˜• ê·¸ë¦¬ê¸° (ì •ì  ê°œìˆ˜ 3, ì‹œìž‘ offset 0) */
 	_deviceContext->Draw(vertexCount, startVertexLocation);
 }
 

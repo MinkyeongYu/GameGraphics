@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 /* Texture
- * : GPU ¸®¼Ò½º(ÅØ½ºÃ³)¸¦ ·ÎµåÇÏ°í, ¼ÎÀÌ´õ(Shader)¿¡¼­ Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï Shader Resource View¸¦ »ı¼º ¹× °ü¸®ÇÏ´Â Å¬·¡½º
+ * : GPU ë¦¬ì†ŒìŠ¤(í…ìŠ¤ì²˜)ë¥¼ ë¡œë“œí•˜ê³ , ì…°ì´ë”(Shader)ì—ì„œ ì ‘ê·¼í•  ìˆ˜ ìˆë„ë¡ Shader Resource Viewë¥¼ ìƒì„± ë° ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
  */
 class Texture
 {
@@ -18,6 +18,6 @@ private:
 	ComPtr<ID3D11Device> _device;
 
 	/* Shader Resource View
-		: ¼ÎÀÌ´õ(Shader)°¡ GPU ¸®¼Ò½º(ÅØ½ºÃ³, ¹öÆÛ µî)¿¡ Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï ¸¸µé¾îÁÖ´Â °´Ã¼ */
+		: ì…°ì´ë”(Shader)ê°€ GPU ë¦¬ì†ŒìŠ¤(í…ìŠ¤ì²˜, ë²„í¼ ë“±)ì— ì ‘ê·¼í•  ìˆ˜ ìˆë„ë¡ ë§Œë“¤ì–´ì£¼ëŠ” ê°ì²´ */
 	ComPtr<ID3D11ShaderResourceView> _shaderResourceView;
 };

@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 
 /* IndexBuffer
- * : �ε��� �����͸� GPU VRAM�� ���ε��ϰ�, IA(Input Assembler) �ܰ迡�� ����ϴ� ���� Ŭ����
+ * : 인덱스 데이터를 GPU VRAM에 업로드하고, IA(Input Assembler) 단계에서 사용하는 버퍼 클래스
+ *	 정점을 재사용하여 메모리 사용을 줄이고, 렌더링 성능을 최적화하기 위함
  */
 class IndexBuffer
 {

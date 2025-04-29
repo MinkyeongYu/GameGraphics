@@ -1,16 +1,16 @@
-#pragma once
+ï»¿#pragma once
 
-// ¼ÎÀÌ´õ°¡ ¾îµğ¼­ ¾²ÀÌ´ÂÁö ±¸ºĞÇÏ´Â ¿ëµµ
+// ì…°ì´ë”ê°€ ì–´ë””ì„œ ì“°ì´ëŠ”ì§€ êµ¬ë¶„í•˜ëŠ” ìš©ë„
 enum ShaderScope
 {
 	SS_None = 0,
 	SS_VertexShader = (1 << 0),		// 1
-	SS_PixelShader	= (1 << 1),		// ¿ŞÂÊ ºñÆ®·Î ÇÑÄ­ ¿Å±è (2^0 -> 2^1), 2
+	SS_PixelShader	= (1 << 1),		// ì™¼ìª½ ë¹„íŠ¸ë¡œ í•œì¹¸ ì˜®ê¹€ (2^0 -> 2^1), 2
 	SS_Both			= SS_PixelShader | SS_VertexShader,		// 3
 };
 
 /* Shader
- * : ¼ÎÀÌ´õ(Shader)¸¦ ·ÎµåÇÏ°í ÄÄÆÄÀÏÇÏ¸ç, ¼ÎÀÌ´õ ¹ÙÀÌÆ®ÄÚµå¸¦ °ü¸®ÇÏ´Â ±âº» Å¬·¡½º
+ * : ì…°ì´ë”(Shader)ë¥¼ ë¡œë“œí•˜ê³  ì»´íŒŒì¼í•˜ë©°, ì…°ì´ë” ë°”ì´íŠ¸ì½”ë“œë¥¼ ê´€ë¦¬í•˜ëŠ” ê¸°ë³¸ í´ë˜ìŠ¤
  */
 class Shader
 {
@@ -24,11 +24,11 @@ public:
 	ComPtr<ID3DBlob> GetBlob() { return _blob; }
 
 protected:
-	/* DefaultVertexShader.hlsl¿¡¼­ shader ·ÎµåÇÏ°í ÄÄÆÄÀÏÇÏ¿© °á°ú¸¦ ID3DBlob¿¡ ÀúÀå */
+	/* DefaultVertexShader.hlslì—ì„œ shader ë¡œë“œí•˜ê³  ì»´íŒŒì¼í•˜ì—¬ ê²°ê³¼ë¥¼ ID3DBlobì— ì €ì¥ */
 	void LoadShaderFromFile(const std::wstring& path, const std::string& name, const std::string& version);
 
 protected:
-	// Á¤Á¡/ÇÈ¼¿ ¼ÎÀÌ´õÀÇ ¹ÙÀÌÆ® ÄÚµå (InputLayout »ı¼º¿¡µµ »ç¿ë)
+	// ì •ì /í”½ì…€ ì…°ì´ë”ì˜ ë°”ì´íŠ¸ ì½”ë“œ (InputLayout ìƒì„±ì—ë„ ì‚¬ìš©)
 	ComPtr<ID3DBlob> _blob = nullptr;
 
 	ComPtr<ID3D11Device> _device;
@@ -38,7 +38,7 @@ protected:
 };
 
 /* VertexShader
- * : Vertex Shader(Á¤Á¡ º¯È¯)¸¦ »ı¼º ¹× °ü¸®ÇÏ´Â Å¬·¡½º
+ * : Vertex Shader(ì •ì  ë³€í™˜)ë¥¼ ìƒì„± ë° ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
  */
 class VertexShader : public Shader
 {
@@ -57,7 +57,7 @@ protected:
 };
 
 /* PixelShader
- * : Pixel Shader(ÇÈ¼¿ »ö»ó °è»ê)¸¦ »ı¼º ¹× °ü¸®ÇÏ´Â Å¬·¡½º
+ * : Pixel Shader(í”½ì…€ ìƒ‰ìƒ ê³„ì‚°)ë¥¼ ìƒì„± ë° ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
  */
 class PixelShader : public Shader
 {

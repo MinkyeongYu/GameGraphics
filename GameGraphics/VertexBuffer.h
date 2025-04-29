@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 /* VertexBuffer
- * : Á¤Á¡(Vertex) µ¥ÀÌÅÍ¸¦ GPU VRAM¿¡ ¾÷·ÎµåÇÏ°í, IA(Input Assembler) ´Ü°è¿¡¼­ »ç¿ëÇÏ´Â ¹öÆÛ Å¬·¡½º
+ * : ì •ì (Vertex) ë°ì´í„°ë¥¼ GPU VRAMì— ì—…ë¡œë“œí•˜ê³ , IA(Input Assembler) ë‹¨ê³„ì—ì„œ ì‚¬ìš©í•˜ëŠ” ë²„í¼ í´ë˜ìŠ¤
  */
 class VertexBuffer
 {
@@ -23,19 +23,19 @@ public:
 
 		D3D11_BUFFER_DESC desc;
 		ZeroMemory(&desc, sizeof(desc));
-		/* GPU¸¸ ÀĞÀ» ¼ö ÀÖÀ½. CPU Á¢±Ù ºÒ°¡ */
+		/* GPUë§Œ ì½ì„ ìˆ˜ ìˆìŒ. CPU ì ‘ê·¼ ë¶ˆê°€ */
 		desc.Usage = D3D11_USAGE_IMMUTABLE;
-		/* Vertex Buffer ¹ÙÀÎµù ¿ëµµ·Î »ç¿ë */
+		/* Vertex Buffer ë°”ì¸ë”© ìš©ë„ë¡œ ì‚¬ìš© */
 		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		/* Vertex Å©±â * Á¤Á¡ °³¼ö */
+		/* Vertex í¬ê¸° * ì •ì  ê°œìˆ˜ */
 		desc.ByteWidth = static_cast<uint32>(_stride * _count);
 
 		D3D11_SUBRESOURCE_DATA data;
 		ZeroMemory(&data, sizeof(data));
-		/* Ã¹¹øÂ° data ½ÃÀÛÁÖ¼Ò, _vertices.data()·Î ´ëÃ¼ °¡´É */
+		/* ì²«ë²ˆì§¸ data ì‹œì‘ì£¼ì†Œ, _vertices.data()ë¡œ ëŒ€ì²´ ê°€ëŠ¥ */
 		data.pSysMem = &vertices[0];
 
-		// desc¿Í data¸¦ ±â¹İÀ¸·Î ¹öÆÛ »ı¼º ÈÄ _vertexBuffer¿¡ ÀúÀå
+		// descì™€ dataë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë²„í¼ ìƒì„± í›„ _vertexBufferì— ì €ì¥
 		_device->CreateBuffer(&desc, &data, _vertexBuffer.GetAddressOf());
 	}
 
@@ -43,7 +43,7 @@ private:
 	ComPtr<ID3D11Device> _device;
 
 	// GPU Buffer
-	// Á¤Á¡ µ¥ÀÌÅÍ¸¦ GPU VRAM¿¡ Àü´ŞÇÏ±â À§ÇÑ ¹öÆÛ (Vertex Buffer)
+	// ì •ì  ë°ì´í„°ë¥¼ GPU VRAMì— ì „ë‹¬í•˜ê¸° ìœ„í•œ ë²„í¼ (Vertex Buffer)
 	ComPtr<ID3D11Buffer> _vertexBuffer;
 
 	uint32 _stride = 0;

@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "SamplerState.h"
 
 SamplerState::SamplerState(ComPtr<ID3D11Device> device)
@@ -12,38 +12,38 @@ SamplerState::~SamplerState()
 
 void SamplerState::CreateSamplerState()
 {
-	// »ùÇÃ·¯ »óÅÂ(Sampler State) ¼³Á¤ ±¸Á¶Ã¼ ÃÊ±âÈ­
+	// ìƒ˜í”ŒëŸ¬ ìƒíƒœ(Sampler State) ì„¤ì • êµ¬ì¡°ì²´ ì´ˆê¸°í™”
 	D3D11_SAMPLER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 
-	// ÅØ½ºÃ³ ÁÂÇ¥ ¹üÀ§¸¦ ¹þ¾î³µÀ» ¶§ Å×µÎ¸® »ö»ó(Border Color) »ç¿ë (U, V, W °¢°¢¿¡ Àû¿ë)
+	// í…ìŠ¤ì²˜ ì¢Œí‘œ ë²”ìœ„ë¥¼ ë²—ì–´ë‚¬ì„ ë•Œ í…Œë‘ë¦¬ ìƒ‰ìƒ(Border Color) ì‚¬ìš© (U, V, W ê°ê°ì— ì ìš©)
 	desc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
 	desc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
 	desc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
 
-	// Å×µÎ¸®(Border) »ö»ó ¼³Á¤ R,G,B,A (»¡°­: 1,0,0,1)
+	// í…Œë‘ë¦¬(Border) ìƒ‰ìƒ ì„¤ì • R,G,B,A (ë¹¨ê°•: 1,0,0,1)
 	desc.BorderColor[0] = 1;
 	desc.BorderColor[1] = 0;
 	desc.BorderColor[2] = 0;
 	desc.BorderColor[3] = 1;
 
-	// ºñ±³ ÇÔ¼ö (»ç¿ëÇÏÁö ¾ÊÀ½ ¡æ Ç×»ó Åë°ú)
+	// ë¹„êµ í•¨ìˆ˜ (ì‚¬ìš©í•˜ì§€ ì•ŠìŒ â†’ í•­ìƒ í†µê³¼)
 	desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
 
-	// ÇÊÅÍ ¼³Á¤ (ÅØ½ºÃ³ Ãà¼Ò/È®´ë/¹Ó¸Ê ÀüºÎ ¼±Çü º¸°£)
+	// í•„í„° ì„¤ì • (í…ìŠ¤ì²˜ ì¶•ì†Œ/í™•ëŒ€/ë°‰ë§µ ì „ë¶€ ì„ í˜• ë³´ê°„)
 	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 
-	// ÀÌ¹æ¼º ÇÊÅÍ¸µ ÃÖ´ëÄ¡ (ÀÏ¹ÝÀûÀ¸·Î 16 »ç¿ë)
+	// ì´ë°©ì„± í•„í„°ë§ ìµœëŒ€ì¹˜ (ì¼ë°˜ì ìœ¼ë¡œ 16 ì‚¬ìš©)
 	desc.MaxAnisotropy = 16;
 
-	// »ç¿ëÇÒ ¹Ó¸Ê LOD ¹üÀ§ ¼³Á¤
+	// ì‚¬ìš©í•  ë°‰ë§µ LOD ë²”ìœ„ ì„¤ì •
 	desc.MinLOD = FLT_MIN;
 	desc.MaxLOD = FLT_MAX;
 
-	// ¹Ó¸Ê LOD ¿ÀÇÁ¼Â (±âº»°ª 0)
+	// ë°‰ë§µ LOD ì˜¤í”„ì…‹ (ê¸°ë³¸ê°’ 0)
 	desc.MipLODBias = 0.f;
 
-	// À§ ¼³Á¤À» ±â¹ÝÀ¸·Î »ùÇÃ·¯ »óÅÂ °´Ã¼ »ý¼º
+	// ìœ„ ì„¤ì •ì„ ê¸°ë°˜ìœ¼ë¡œ ìƒ˜í”ŒëŸ¬ ìƒíƒœ ê°ì²´ ìƒì„±
 	HRESULT hResult = _device->CreateSamplerState(&desc, _samplerState.GetAddressOf());
 	CHECK(hResult);
 }

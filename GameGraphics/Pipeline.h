@@ -1,44 +1,44 @@
-#pragma once
+ï»¿#pragma once
 
 /* PipelineInfo
- * : ÆÄÀÌÇÁ¶óÀÎ(Pipeline)¿¡¼­ °øÅëÀûÀ¸·Î »ç¿ëÇÒ °´Ã¼µé(InputLayout, VertexShader, PixelShader µî)°ú Topology Á¤º¸¸¦ ¸ğ¾ÆµĞ ±¸Á¶Ã¼
+ * : íŒŒì´í”„ë¼ì¸(Pipeline)ì—ì„œ ê³µí†µì ìœ¼ë¡œ ì‚¬ìš©í•  ê°ì²´ë“¤(InputLayout, VertexShader, PixelShader ë“±)ê³¼ Topology ì •ë³´ë¥¼ ëª¨ì•„ë‘” êµ¬ì¡°ì²´
  */
 struct PipelineInfo
 {
 	/* Input Layout
-	 * : Á¤Á¡ ¹öÆÛ(Vertex Buffer)ÀÇ µ¥ÀÌÅÍ ±¸Á¶¸¦ GPU ¼ÎÀÌ´õ¿¡°Ô ¾Ë·ÁÁÖ´Â °´Ã¼
+	 * : ì •ì  ë²„í¼(Vertex Buffer)ì˜ ë°ì´í„° êµ¬ì¡°ë¥¼ GPU ì…°ì´ë”ì—ê²Œ ì•Œë ¤ì£¼ëŠ” ê°ì²´
 	 */
 	std::shared_ptr<InputLayout> _inputLayout;
 
 	/* Vertex Shader
-	 * : Á¤Á¡ º¯È¯ ´Ü°è (¿ùµå/ºä/ÇÁ·ÎÁ§¼Ç Çà·Ä Àû¿ë)¿¡¼­ ½ÇÇàµÇ´Â ¼ÎÀÌ´õ
+	 * : ì •ì  ë³€í™˜ ë‹¨ê³„ (ì›”ë“œ/ë·°/í”„ë¡œì ì…˜ í–‰ë ¬ ì ìš©)ì—ì„œ ì‹¤í–‰ë˜ëŠ” ì…°ì´ë”
 	 */
 	std::shared_ptr<VertexShader> _vertexShader;
 
 	/* Pixel Shader
-	 * : ÇÈ¼¿ »ö»ó °è»ê ´Ü°è (ÅØ½ºÃ³, ¶óÀÌÆÃ Àû¿ë)¿¡¼­ ½ÇÇàµÇ´Â ¼ÎÀÌ´õ
+	 * : í”½ì…€ ìƒ‰ìƒ ê³„ì‚° ë‹¨ê³„ (í…ìŠ¤ì²˜, ë¼ì´íŒ… ì ìš©)ì—ì„œ ì‹¤í–‰ë˜ëŠ” ì…°ì´ë”
 	 */
 	std::shared_ptr<PixelShader> _pixelShader;
 
 	/* Rasterizer State
-	 * : »ï°¢ÇüÀ» È­¸é¿¡ ¾î¶»°Ô ±×¸±Áö(Ã¤¿ì±â, ÄÃ¸µ µî) ¼³Á¤ÇÏ´Â ·¡½ºÅÍ¶óÀÌÀú »óÅÂ °´Ã¼
+	 * : ì‚¼ê°í˜•ì„ í™”ë©´ì— ì–´ë–»ê²Œ ê·¸ë¦´ì§€(ì±„ìš°ê¸°, ì»¬ë§ ë“±) ì„¤ì •í•˜ëŠ” ë˜ìŠ¤í„°ë¼ì´ì € ìƒíƒœ ê°ì²´
 	 */
 	std::shared_ptr<RasterizerState> _rasterizerState;
 
 	/* Blend State
-	 * : ÇÈ¼¿ »ö»ó È¥ÇÕ(¾ËÆÄ ºí·»µù µî) ¹æ½ÄÀ» Á¤ÀÇÇÏ´Â ºí·»µù »óÅÂ °´Ã¼
+	 * : í”½ì…€ ìƒ‰ìƒ í˜¼í•©(ì•ŒíŒŒ ë¸”ë Œë”© ë“±) ë°©ì‹ì„ ì •ì˜í•˜ëŠ” ë¸”ë Œë”© ìƒíƒœ ê°ì²´
 	 */
 	std::shared_ptr<BlendState> _blendState;
 
 
 	/* Primitive Topology
-	 * : Á¤Á¡À» ¾î¶² ÇüÅÂ(»ï°¢Çü ¸®½ºÆ®, ¶óÀÎ ½ºÆ®¸³ µî)·Î ±×¸±Áö Á¤ÀÇÇÏ´Â ¼³Á¤
+	 * : ì •ì ì„ ì–´ë–¤ í˜•íƒœ(ì‚¼ê°í˜• ë¦¬ìŠ¤íŠ¸, ë¼ì¸ ìŠ¤íŠ¸ë¦½ ë“±)ë¡œ ê·¸ë¦´ì§€ ì •ì˜í•˜ëŠ” ì„¤ì •
 	 */
 	D3D11_PRIMITIVE_TOPOLOGY topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 };
 
 /* Pipeline
- * : PipelineInfo¸¦ ±â¹İÀ¸·Î ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ »óÅÂ¸¦ ±¸¼ºÇÏ°í ¼³Á¤ÇÏ´Â Å¬·¡½º
+ * : PipelineInfoë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ ìƒíƒœë¥¼ êµ¬ì„±í•˜ê³  ì„¤ì •í•˜ëŠ” í´ë˜ìŠ¤
  */
 class Pipeline
 {
@@ -48,21 +48,21 @@ public:
 
 public:
 	/* UpdatePipeline
-	 * : IA ~ OM ´Ü°è±îÁö PipelineInfo¸¦ ±â¹İÀ¸·Î GPU »óÅÂ¸¦ ÇÑ ¹ø¿¡ ¼³Á¤
+	 * : IA ~ OM ë‹¨ê³„ê¹Œì§€ PipelineInfoë¥¼ ê¸°ë°˜ìœ¼ë¡œ GPU ìƒíƒœë¥¼ í•œ ë²ˆì— ì„¤ì •
 	 */
 	void UpdatePipeline(PipelineInfo info);
 
 	/* SetVertexBuffer
-	 * : VertexBuffer¸¦ Input Assembler ´Ü°è¿¡ ¼³Á¤
+	 * : VertexBufferë¥¼ Input Assembler ë‹¨ê³„ì— ì„¤ì •
 	 */
 	void SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer);
 	/* SetIndexBuffer
-	 * : IndexBuffer¸¦ Input Assembler ´Ü°è¿¡ ¼³Á¤
+	 * : IndexBufferë¥¼ Input Assembler ë‹¨ê³„ì— ì„¤ì •
 	 */
 	void SetIndexBuffer(std::shared_ptr<IndexBuffer> buffer);
 
 	/* SetConstantBuffer
-	* : VS/PS ¼ÎÀÌ´õ¿¡ °øÅë µ¥ÀÌÅÍ¸¦ Àü´ŞÇÏ´Â Constant Buffer¸¦ ¼³Á¤
+	* : VS/PS ì…°ì´ë”ì— ê³µí†µ ë°ì´í„°ë¥¼ ì „ë‹¬í•˜ëŠ” Constant Bufferë¥¼ ì„¤ì •
 	*/
 	template <typename T>
 	void SetConstantBuffer(uint32 slot, uint32 scope, std::shared_ptr<ConstantBuffer<T>> buffer)
@@ -78,20 +78,20 @@ public:
 	}
 
 	/* SetTexture
-	 * : VertexShader¿Í PixelShader¿¡ ÅØ½ºÃ³(Shader Resource View)¸¦ ¹ÙÀÎµù
+	 * : VertexShaderì™€ PixelShaderì— í…ìŠ¤ì²˜(Shader Resource View)ë¥¼ ë°”ì¸ë”©
 	 */
 	void SetShaderResources(uint32 slot, uint32 scope, std::shared_ptr<Texture> shaderResouceView);
 	/* SetSamplerState
-	 * : VertexShader¿Í PixelShader¿¡ »ùÇÃ·¯(Sampler State)¸¦ ¹ÙÀÎµù
+	 * : VertexShaderì™€ PixelShaderì— ìƒ˜í”ŒëŸ¬(Sampler State)ë¥¼ ë°”ì¸ë”©
 	 */
 	void SetSamplerState(uint32 slot, uint32 scope, std::shared_ptr<SamplerState> samplerState);
 
 	/* Draw
-	 * : OM´Ü°è¿¡ Á¤Á¡(Vertex) µ¥ÀÌÅÍ¸¸À¸·Î µå·Î¿ì (ÀÎµ¦½º ¾øÀÌ)
+	 * : OMë‹¨ê³„ì— ì •ì (Vertex) ë°ì´í„°ë§Œìœ¼ë¡œ ë“œë¡œìš° (ì¸ë±ìŠ¤ ì—†ì´)
 	 */
 	void Draw(uint32 vertexCount, uint32 startVertexLocation);
 	/* DrawIndexed
-	 * : OM´Ü°è¿¡ ÀÎµ¦½º(Index) µ¥ÀÌÅÍ¸¦ »ç¿ëÇÏ¿© µå·Î¿ì
+	 * : OMë‹¨ê³„ì— ì¸ë±ìŠ¤(Index) ë°ì´í„°ë¥¼ ì‚¬ìš©í•˜ì—¬ ë“œë¡œìš°
 	 */
 	void DrawIndexed(uint32 indexCount, uint32 startIndexLocation, uint32 baseVertexLocation);
 

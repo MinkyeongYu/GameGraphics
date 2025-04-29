@@ -3,8 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\GameGraphics\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Geometry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\Geometry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexData.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\VertexData.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\IndexBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\IndexBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\IndexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\IndexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Graphics.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\Graphics.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\InputLayout.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\InputLayout.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\VertexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Pipeline.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\Pipeline.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -19,10 +51,6 @@
       "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\DefaultVertexShader.hlsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\VertexData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -31,16 +59,8 @@
       "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexData.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\VertexData.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Pipeline.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\Pipeline.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Pipeline.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -55,16 +75,8 @@
       "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\VertexBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\IndexBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\IndexBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\InputLayout.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\InputLayout.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Geometry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\Geometry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GeometryHelper.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -123,18 +135,6 @@
       "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\GeometryHelper.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\InputLayout.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\InputLayout.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\IndexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\IndexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{558728B1-BE99-4DB0-84A9-FCDB47456672}|GameGraphics\\GameGraphics.vcxproj|solutionrelative:GameGraphics\\VertexBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.22621.0\\um\\d3d11.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
@@ -173,7 +173,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 116,
-          "SelectedChildIndex": 21,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
@@ -186,12 +186,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-02T08:34:38.153Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "pch.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\pch.h",
               "RelativeDocumentMoniker": "GameGraphics\\pch.h",
@@ -200,8 +199,7 @@
               "ViewState": "AgIAAB8AAAAAAAAAAAAcwDwAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-02T08:33:12.14Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -214,8 +212,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-02T08:38:17.405Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -228,8 +225,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-02T08:38:39.516Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -242,12 +238,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-02T08:38:29.949Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "DefaultVertexShader.hlsl",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\DefaultVertexShader.hlsl",
               "RelativeDocumentMoniker": "GameGraphics\\DefaultVertexShader.hlsl",
@@ -256,12 +251,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-04-06T11:17:14.896Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "Game.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Game.h",
               "RelativeDocumentMoniker": "GameGraphics\\Game.h",
@@ -270,12 +264,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-02T11:01:11.06Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
               "Title": "Graphics.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Graphics.h",
               "RelativeDocumentMoniker": "GameGraphics\\Graphics.h",
@@ -284,12 +277,11 @@
               "ViewState": "AgIAAAsAAAAAAAAAAADgvxoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-25T12:51:41.943Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "VertexBuffer.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexBuffer.h",
               "RelativeDocumentMoniker": "GameGraphics\\VertexBuffer.h",
@@ -298,18 +290,17 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-26T08:58:03.136Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 3,
               "Title": "IndexBuffer.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\IndexBuffer.h",
               "RelativeDocumentMoniker": "GameGraphics\\IndexBuffer.h",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\IndexBuffer.h",
               "RelativeToolTip": "GameGraphics\\IndexBuffer.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-26T09:00:00.735Z",
               "IsPinned": true,
@@ -317,7 +308,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "InputLayout.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\InputLayout.h",
               "RelativeDocumentMoniker": "GameGraphics\\InputLayout.h",
@@ -326,18 +317,17 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-26T09:00:07.026Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 1,
               "Title": "Geometry.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Geometry.h",
               "RelativeDocumentMoniker": "GameGraphics\\Geometry.h",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Geometry.h",
               "RelativeToolTip": "GameGraphics\\Geometry.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-26T10:10:38.91Z",
               "IsPinned": true,
@@ -345,7 +335,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "GeometryHelper.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GeometryHelper.h",
               "RelativeDocumentMoniker": "GameGraphics\\GeometryHelper.h",
@@ -354,12 +344,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-26T10:10:58.164Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "VertexData.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexData.h",
               "RelativeDocumentMoniker": "GameGraphics\\VertexData.h",
@@ -368,12 +357,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-26T10:11:14.427Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "Shader.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Shader.h",
               "RelativeDocumentMoniker": "GameGraphics\\Shader.h",
@@ -382,12 +370,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-27T04:22:06.853Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "ConstantBuffer.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\ConstantBuffer.h",
               "RelativeDocumentMoniker": "GameGraphics\\ConstantBuffer.h",
@@ -396,12 +383,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-27T05:12:43.162Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "Texture.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Texture.h",
               "RelativeDocumentMoniker": "GameGraphics\\Texture.h",
@@ -410,12 +396,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-27T05:47:59.734Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "RasterizerState.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\RasterizerState.h",
               "RelativeDocumentMoniker": "GameGraphics\\RasterizerState.h",
@@ -424,12 +409,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-27T05:59:58.961Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "SamplerState.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\SamplerState.h",
               "RelativeDocumentMoniker": "GameGraphics\\SamplerState.h",
@@ -438,12 +422,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-27T06:00:28.427Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "BlendState.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\BlendState.h",
               "RelativeDocumentMoniker": "GameGraphics\\BlendState.h",
@@ -452,12 +435,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-27T06:00:46.39Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "Pipeline.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Pipeline.h",
               "RelativeDocumentMoniker": "GameGraphics\\Pipeline.h",
@@ -466,18 +448,17 @@
               "ViewState": "AgIAACEAAAAAAAAAAAAAADAAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-27T06:39:49.87Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "GameObject.h",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GameObject.h",
               "RelativeDocumentMoniker": "GameGraphics\\GameObject.h",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GameObject.h",
               "RelativeToolTip": "GameGraphics\\GameObject.h",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwB8AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-27T07:43:18.808Z",
               "IsPinned": true,
@@ -487,7 +468,7 @@
         },
         {
           "DockedWidth": 119,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 18,
           "Children": [
             {
               "$type": "Document",
@@ -500,7 +481,8 @@
               "ViewState": "AgIAAM0FAAAAAAAAAAAawNsFAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-10T08:08:41.444Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -543,7 +525,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "Game.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Game.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\Game.cpp",
@@ -552,18 +534,17 @@
               "ViewState": "AgIAAAMAAAAAAAAAAADgvw0AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-02T11:01:16.078Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Graphics.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Graphics.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\Graphics.cpp",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Graphics.cpp",
               "RelativeToolTip": "GameGraphics\\Graphics.cpp",
-              "ViewState": "AgIAAAEAAAAAAAAAAAA3wBEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADUAAAAAAAAAAAAQwEoAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-25T12:53:12.005Z",
               "IsPinned": true,
@@ -571,46 +552,49 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 7,
               "Title": "VertexBuffer.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexBuffer.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\VertexBuffer.cpp",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexBuffer.cpp",
               "RelativeToolTip": "GameGraphics\\VertexBuffer.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAEAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAA+wAEAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-26T08:59:45.553Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 4,
               "Title": "IndexBuffer.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\IndexBuffer.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\IndexBuffer.cpp",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\IndexBuffer.cpp",
               "RelativeToolTip": "GameGraphics\\IndexBuffer.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAEAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAA+wBwAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-26T08:59:19.147Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 6,
               "Title": "InputLayout.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\InputLayout.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\InputLayout.cpp",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\InputLayout.cpp",
               "RelativeToolTip": "GameGraphics\\InputLayout.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAEAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAA+wAEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-26T08:59:55.977Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "GeometryHelper.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GeometryHelper.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\GeometryHelper.cpp",
@@ -623,13 +607,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "VertexData.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexData.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\VertexData.cpp",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\VertexData.cpp",
               "RelativeToolTip": "GameGraphics\\VertexData.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAA+wBEAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-26T10:11:19.365Z",
               "IsPinned": true,
@@ -637,7 +621,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "Shader.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Shader.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\Shader.cpp",
@@ -650,7 +634,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "ConstantBuffer.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\ConstantBuffer.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\ConstantBuffer.cpp",
@@ -663,7 +647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "Texture.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Texture.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\Texture.cpp",
@@ -676,7 +660,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "RasterizerState.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\RasterizerState.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\RasterizerState.cpp",
@@ -689,7 +673,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "SamplerState.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\SamplerState.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\SamplerState.cpp",
@@ -702,7 +686,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "BlendState.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\BlendState.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\BlendState.cpp",
@@ -715,13 +699,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "Pipeline.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Pipeline.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\Pipeline.cpp",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\Pipeline.cpp",
               "RelativeToolTip": "GameGraphics\\Pipeline.cpp",
-              "ViewState": "AgIAACAAAAAAAAAAAADgv0AAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwDsAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-27T06:39:52.877Z",
               "IsPinned": true,
@@ -729,13 +713,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "GameObject.cpp",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GameObject.cpp",
               "RelativeDocumentMoniker": "GameGraphics\\GameObject.cpp",
               "ToolTip": "C:\\Users\\user\\Desktop\\GameGraphics\\GameGraphics\\GameObject.cpp",
               "RelativeToolTip": "GameGraphics\\GameObject.cpp",
-              "ViewState": "AgIAADcAAAAAAAAAAAAgwFQAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAADgvyEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-27T07:43:21.096Z",
               "IsPinned": true,

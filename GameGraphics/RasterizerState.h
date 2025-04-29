@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 /* RasterizerState
- * : »ï°¢ÇüÀ» È­¸é¿¡ ·»´õ¸µÇÒ ¶§, Ã¤¿ì±â ¸ğµå(Fill Mode), ÄÃ¸µ(Culling), ¾Õ¸é/µŞ¸é Á¤ÀÇ µî
- *   ·¡½ºÅÍÈ­(Rasterization) °úÁ¤ÀÇ »óÅÂ¸¦ ¼³Á¤ÇÏ´Â Å¬·¡½º
+ * : ì‚¼ê°í˜•ì„ í™”ë©´ì— ë Œë”ë§í•  ë•Œ, ì±„ìš°ê¸° ëª¨ë“œ(Fill Mode), ì»¬ë§(Culling), ì•ë©´/ë’·ë©´ ì •ì˜ ë“±
+ *   ë˜ìŠ¤í„°í™”(Rasterization) ê³¼ì •ì˜ ìƒíƒœë¥¼ ì„¤ì •í•˜ëŠ” í´ë˜ìŠ¤
  */
 class RasterizerState
 {
@@ -13,8 +13,8 @@ public:
 public:
 	ComPtr<ID3D11RasterizerState> GetComPtr() { return _rasterizerState; }
 
-	/* RasterizerState »ı¼º
-   - »ï°¢ÇüÀ» È­¸é¿¡ ¾î¶»°Ô ±×¸±Áö ¼³Á¤ (Ã¤¿ì±â ¸ğµå, ÄÃ¸µ, ¾Õ¸é ¹æÇâ µî) */
+	/* RasterizerState ìƒì„±
+   - ì‚¼ê°í˜•ì„ í™”ë©´ì— ì–´ë–»ê²Œ ê·¸ë¦´ì§€ ì„¤ì • (ì±„ìš°ê¸° ëª¨ë“œ, ì»¬ë§, ì•ë©´ ë°©í–¥ ë“±) */
 	void CreateRasterizerState();
 
 private:
