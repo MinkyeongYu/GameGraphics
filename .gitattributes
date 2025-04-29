@@ -1,0 +1,5 @@
+# 모든 텍스트 파일을 UTF-8로 처리
+* text=auto eol=lf
+*.h text working-tree-encoding=UTF-8
+*.cpp text working-tree-encoding=UTF-8
+*.txt text working-tree-encoding=UTF-8
