@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "pch.h"
+#include "Transform.h"
 
 /* GameObject
  * : 3D 게임 오브젝트를 구성하는 기본 클래스
@@ -72,8 +73,6 @@ private:
 	TransformData _transformData;
 	//ComPtr<ID3D11Buffer> _constantBuffer;
 
-	/* SRT */
-	Vec3 _localPosition = { 0.f, 0.f, 0.f };
-	Vec3 _localRotation = { 0.f, 0.f, 0.f };
-	Vec3 _localScale = { 1.f, 1.f, 1.f };
+	std::shared_ptr<Transform> _transform = std::make_shared<Transform>();
+	std::shared_ptr<Transform> _parent = std::make_shared<Transform>();
 };

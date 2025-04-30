@@ -4,7 +4,7 @@
 GameObject::GameObject(ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext> deviceContext)
 	:_device(device)
 {
-	// [1] Create Geometry (Á¤Á¡/ÀÎµ¦½º µ¥ÀÌÅÍ »ı¼º)
+	// [1] Create Geometry (ì •ì /ì¸ë±ìŠ¤ ë°ì´í„° ìƒì„±)
 	_geometry = std::make_shared<Geometry<VertexTextureData>>();
 	GeometryHelper::CreateRectangle(_geometry);
 
@@ -48,6 +48,8 @@ GameObject::GameObject(ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext> 
 	_blendState = std::make_shared<BlendState>(device);
 	_blendState->CreateBlendState();
 
+	_parent->AddChild(_transform);
+	_transform->SetParent(_parent);
 }
 
 GameObject::~GameObject()
@@ -57,20 +59,24 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	_localPosition.x += 0.001f;
+	// ë¶€ëª¨ ê°’ì„ ë³€ê²½í•˜ë©´ ìì‹ì˜ pos, rot, scale ê°’ì´ ë³€ê²½ë˜ëŠ”ì§€ í™•ì¸
+	Vec3 pos = _parent->GetPosition();
+	pos.x += 0.001f;
+	_parent->SetPosition(pos);
 
-	// Create SRT
-	Matrix scaleMatrix = Matrix::CreateScale(_localScale / 3);
-	Matrix rotationMatrix = Matrix::CreateRotationX(_localRotation.x);
-	rotationMatrix *= Matrix::CreateRotationY(_localRotation.y);
-	rotationMatrix *= Matrix::CreateRotationZ(_localRotation.z);
-	Matrix translationMatrix = Matrix::CreateTranslation(_localPosition);
+	Vec3 rot = _parent->GetRotation();
+	rot.z += 0.01f;
+	_parent->SetRotation(rot);
+
+	Vec3 scale = _parent->GetScale();
+	scale.x /= 1.001f;
+	scale.y /= 1.001f;
+	_parent->SetScale(scale);
 
 	// Create WorldMatrix
-	Matrix worldMatrix = scaleMatrix * rotationMatrix * translationMatrix;
-	_transformData.worldMatrix = worldMatrix;
+	_transformData.worldMatrix = _transform->GetWorldMatrix();
 
-	// ¹öÆÛ¿¡ µ¥ÀÌÅÍ º¹»ç
+	// ë²„í¼ì— ë°ì´í„° ë³µì‚¬
 	_constantBuffer->CopyData(_transformData);
 }
 
@@ -86,34 +92,34 @@ void GameObject::Render(std::shared_ptr<Pipeline> pipeline)
 		info._blendState = _blendState;
 
 		/*
-		- IA : GPU¿¡°Ô Á¤Á¡ µ¥ÀÌÅÍÀÇ ±¸Á¶ Àü´Ş
+		- IA : GPUì—ê²Œ ì •ì  ë°ì´í„°ì˜ êµ¬ì¡° ì „ë‹¬
 			 : _graphics->GetDeviceContext()->IASetInputLayout(_inputLayout->GetComPtr().Get());
-		- IA : °¢ Á¤Á¡À» ¾î¶»°Ô ÀÌ¾îÁÙÁö Àü´Ş, »ï°¢ÇüÀ¸·Î ÀÌ¾îÁÖµµ·Ï ¼³Á¤
+		- IA : ê° ì •ì ì„ ì–´ë–»ê²Œ ì´ì–´ì¤„ì§€ ì „ë‹¬, ì‚¼ê°í˜•ìœ¼ë¡œ ì´ì–´ì£¼ë„ë¡ ì„¤ì •
 			 : _graphics->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		- VS, PS : Vertex, Pixel Shader ¼³Á¤
+		- VS, PS : Vertex, Pixel Shader ì„¤ì •
 			 : _graphics->GetDeviceContext()->VSSetShader(_vertexShader->GetComPtr().Get(), nullptr, 0);
 			  _graphics->GetDeviceContext()->PSSetShader(_pixelShader->GetComPtr().Get(), nullptr, 0);
-		- RS : Á¤Á¡ ¡æ ÇÈ¼¿·Î »ï°¢Çü ±×¸®±â
+		- RS : ì •ì  â†’ í”½ì…€ë¡œ ì‚¼ê°í˜• ê·¸ë¦¬ê¸°
 			 : _graphics->GetDeviceContext()->RSSetState(_rasterizerState->GetComPtr().Get());
 		- OM : Blend State
 			 : _graphics->GetDeviceContext()->OMSetBlendState(_blendState->GetComPtr().Get(), _blendState->GetBlendFactor(), _blendState->GetSampleMask());
 		*/
 		pipeline->UpdatePipeline(info);
 
-		// IA (Input Assembler) : Á¤Á¡ÀÇ Á¤º¸ Àü´Ş
-		/* GPU¿¡°Ô Á¤Á¡ ¹öÆÛÀÇ Å©±â¿Í À§Ä¡(stride, offset) Àü´Ş, vertices »ç¿ëÇÔÀ» GPU¿¡ ¾Ë·ÁÁÜ */
+		// IA (Input Assembler) : ì •ì ì˜ ì •ë³´ ì „ë‹¬
+		/* GPUì—ê²Œ ì •ì  ë²„í¼ì˜ í¬ê¸°ì™€ ìœ„ì¹˜(stride, offset) ì „ë‹¬, vertices ì‚¬ìš©í•¨ì„ GPUì— ì•Œë ¤ì¤Œ */
 		pipeline->SetVertexBuffer(_vertexBuffer);
-		/* 32-bit(4Byte) uint ÀÎµ¦½º ¹öÆÛ GPU¿¡ ¹ÙÀÎµù */
+		/* 32-bit(4Byte) uint ì¸ë±ìŠ¤ ë²„í¼ GPUì— ë°”ì¸ë”© */
 		pipeline->SetIndexBuffer(_indexBuffer);
 
-		// VS (Vertex Shader) : Á¤Á¡ÀÇ À§Ä¡/»ö»ó µî °¡°ø
+		// VS (Vertex Shader) : ì •ì ì˜ ìœ„ì¹˜/ìƒ‰ìƒ ë“± ê°€ê³µ
 		pipeline->SetConstantBuffer(0, SS_VertexShader, _constantBuffer);
 
-		// PS (Pixel Shader) : ÇÈ¼¿ ´ÜÀ§ »ö»ó Ã³¸®
+		// PS (Pixel Shader) : í”½ì…€ ë‹¨ìœ„ ìƒ‰ìƒ ì²˜ë¦¬
 		pipeline->SetShaderResources(0, SS_PixelShader, _shaderResoureView);
 		pipeline->SetSamplerState(0, SS_PixelShader, _samplerState);
 
-		// OM (Output Merger) : ÃÖÁ¾ ÇÈ¼¿À» ·»´õ Å¸°Ù¿¡ Ãâ·Â
+		// OM (Output Merger) : ìµœì¢… í”½ì…€ì„ ë Œë” íƒ€ê²Ÿì— ì¶œë ¥
 		pipeline->DrawIndexed(_geometry->GetIndexCount(), 0, 0);
 	}
 }
