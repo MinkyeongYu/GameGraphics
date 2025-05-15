@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GameObject.h"
+#include "MonoBehaviour.h"
 
 GameObject::GameObject(ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext> deviceContext)
 	:_device(device)
@@ -47,9 +48,6 @@ GameObject::GameObject(ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext> 
 	// [11] Create Blend State
 	_blendState = std::make_shared<BlendState>(device);
 	_blendState->CreateBlendState();
-
-	_parent->AddChild(_transform);
-	_transform->SetParent(_parent);
 }
 
 GameObject::~GameObject()
@@ -57,27 +55,121 @@ GameObject::~GameObject()
 
 }
 
+void GameObject::Awake()
+{
+	for (std::shared_ptr<Component>& component : _components)
+	{
+		if(component) component->Awake();
+	}
+
+	for (std::shared_ptr<Component>& script : _scripts)
+	{
+		if (script) script->Awake();
+	}
+}
+
+void GameObject::Start()
+{
+	for (std::shared_ptr<Component>& component : _components)
+	{
+		if (component) component->Start();
+	}
+
+	for (std::shared_ptr<Component>& script : _scripts)
+	{
+		if (script) script->Start();
+	}
+}
+
 void GameObject::Update()
 {
-	// 부모 값을 변경하면 자식의 pos, rot, scale 값이 변경되는지 확인
-	Vec3 pos = _parent->GetPosition();
-	pos.x += 0.001f;
-	_parent->SetPosition(pos);
+	for (std::shared_ptr<Component>& component : _components)
+	{
+		if (component) component->Update();
+	}
 
-	Vec3 rot = _parent->GetRotation();
-	rot.z += 0.01f;
-	_parent->SetRotation(rot);
-
-	Vec3 scale = _parent->GetScale();
-	scale.x /= 1.001f;
-	scale.y /= 1.001f;
-	_parent->SetScale(scale);
+	for (std::shared_ptr<Component>& script : _scripts)
+	{
+		if (script) script->Update();
+	}
 
 	// Create WorldMatrix
-	_transformData.worldMatrix = _transform->GetWorldMatrix();
+	_transformData.worldMatrix = GetOrAddTransform()->GetWorldMatrix();
 
 	// 버퍼에 데이터 복사
 	_constantBuffer->CopyData(_transformData);
+}
+
+void GameObject::LateUpdate()
+{
+	for (std::shared_ptr<Component>& component : _components)
+	{
+		if (component) component->LateUpdate();
+	}
+
+	for (std::shared_ptr<Component>& script : _scripts)
+	{
+		if (script) script->LateUpdate();
+	}
+}
+
+void GameObject::FixedUpdate()
+{
+	for (std::shared_ptr<Component>& component : _components)
+	{
+		if (component) component->FixedUpdate();
+	}
+
+	for (std::shared_ptr<Component>& script : _scripts)
+	{
+		if (script) script->FixedUpdate();
+	}
+}
+
+std::shared_ptr<Component> GameObject::GetFixedComponent(ComponentType type)
+{
+	uint8 index = static_cast<uint8>(type);
+	assert(index < FIXED_COMPOENENT_COUNT);
+
+	return _components[index];
+}
+
+std::shared_ptr<Transform> GameObject::GetTransform()
+{
+	std::shared_ptr<Component> component = GetFixedComponent(ComponentType::Transform);
+
+	return std::static_pointer_cast<Transform>(component);
+}
+
+std::shared_ptr<Camera> GameObject::GetCamera()
+{
+	return std::shared_ptr<Camera>();
+}
+
+std::shared_ptr<Transform> GameObject::GetOrAddTransform()
+{
+	if (GetTransform() == nullptr)
+	{
+		std::shared_ptr<Transform> transform = std::make_shared<Transform>();
+		AddComponent(transform);
+	}
+
+	return GetTransform();
+}
+
+void GameObject::AddComponent(std::shared_ptr<Component> component)
+{
+	component->SetGameObject(shared_from_this());
+
+	uint8 index = static_cast<uint8>(component->GetType());
+	if (index < FIXED_COMPOENENT_COUNT)
+	{
+		_components[index] = component;
+	}
+	else
+	{
+		_scripts.push_back(std::dynamic_pointer_cast<MonoBehaviour>(component));
+	}
 }
 
 void GameObject::Render(std::shared_ptr<Pipeline> pipeline)

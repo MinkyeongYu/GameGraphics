@@ -1,20 +1,35 @@
-﻿#pragma once
+#pragma once
 #include "pch.h"
 #include "Transform.h"
+
+class MonoBehaviour;
+class Camera;
 
 /* GameObject
  * : 3D 게임 오브젝트를 구성하는 기본 클래스
  *   정점/인덱스 데이터, 버퍼, 셰이더, 텍스처, 렌더링 상태 등을 관리하고
  *   Update/Render 함수를 통해 매 프레임 업데이트 및 렌더링을 수행한다.
  */
-class GameObject
+class GameObject : public std::enable_shared_from_this<GameObject>
 {
 public:
 	GameObject(ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext> deviceContext);
 	~GameObject();
 
 public:
+	void Awake();
+	void Start();
 	void Update();
+	void LateUpdate();
+	void FixedUpdate();
+
+	std::shared_ptr<Component> GetFixedComponent(ComponentType type);
+	std::shared_ptr<Transform> GetTransform();
+	std::shared_ptr<Camera> GetCamera();
+
+	std::shared_ptr<Transform> GetOrAddTransform();
+	void AddComponent(std::shared_ptr<Component> component);
+
 	void Render(std::shared_ptr<Pipeline> pipeline);
 
 private:
@@ -73,6 +88,12 @@ private:
 	TransformData _transformData;
 	//ComPtr<ID3D11Buffer> _constantBuffer;
 
-	std::shared_ptr<Transform> _transform = std::make_shared<Transform>();
-	std::shared_ptr<Transform> _parent = std::make_shared<Transform>();
+protected:
+	// GameObject가 보유할 수 있는 고정 컴포넌트들을 저장하는 배열
+	// 각 요소는 Transform, MeshRenderer, Camera 등으로 구성되며,
+	// enum class ComponentType의 순서에 맞춰 인덱스로 접근할 수 있음.
+	// FIXED_COMPOENENT_COUNT는 End를 제외한 고정 컴포넌트의 총 개수
+	// std::shared_ptr<Component>를 사용하여 메모리 자동 관리
+	std::array<std::shared_ptr<Component>, FIXED_COMPOENENT_COUNT> _components;
+	std::vector<std::shared_ptr<Component>> _scripts;
 };

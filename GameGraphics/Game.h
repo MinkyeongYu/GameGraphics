@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "pch.h"
 
 /* Game
@@ -30,5 +30,6 @@ private:
 	/* GameObject
 	 * : 3D 공간상에 배치되는 기본 게임 오브젝트 인스턴스를 가리키는 포인터
 	 */
-	std::shared_ptr<GameObject> _gameObject;
+	std::shared_ptr<GameObject> _monster;
+	std::shared_ptr<GameObject> _camera;
 };

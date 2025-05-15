@@ -3,12 +3,13 @@
 
 class Transform : public Component
 {
+	using Super = Component;
 public:
 	Transform();
 	~Transform();
 
 public:
-	virtual void Init() override;
+	virtual void Awake() override;
 	virtual void Update() override;
 
 	void UpdateTransform();
@@ -32,6 +33,12 @@ public:
 
 	Vec3 GetPosition() { return _position; }
 	void SetPosition(const Vec3& worldPosition);
+
+	// Right, Up, Look vector 반환
+	Vec3 GetRight() { return _worldMatrix.Right(); }
+	Vec3 GetUp() { return _worldMatrix.Up(); }
+	// library에 forward, backward 반대로 되어있음
+	Vec3 GetLook() { return _worldMatrix.Backward(); }
 
 	// object의 world 변환 행렬
 	Matrix GetWorldMatrix() { return _worldMatrix; }
@@ -58,10 +65,6 @@ private:
 	Vec3 _scale;
 	Vec3 _rotation;
 	Vec3 _position;
-
-	Vec3 _right;
-	Vec3 _up;
-	Vec3 _look;
 
 private:
 	std::shared_ptr<Transform> _parent;

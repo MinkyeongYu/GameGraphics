@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "Game.h"
 
 Game::Game()
@@ -18,12 +18,22 @@ void Game::Init(HWND hwnd)
 	// [3] 화면에 출력할 뷰포트 크기 설정
 	_graphics = std::make_shared<Graphics>(hwnd);
 	_pipeline = std::make_shared<Pipeline>(_graphics->GetDeviceContext());
-	_gameObject = std::make_shared<GameObject>(_graphics->GetDevice(), _graphics->GetDeviceContext());
+	_monster = std::make_shared<GameObject>(_graphics->GetDevice(), _graphics->GetDeviceContext());
+	{
+		_monster->GetOrAddTransform();
+	}
+
+	_camera = std::make_shared<GameObject>(_graphics->GetDevice(), _graphics->GetDeviceContext());
+	{
+		_camera->GetOrAddTransform();
+		_camera->AddComponent(std::make_shared<Camera>());
+	}
 }
 
 void Game::Update()
 {
-	_gameObject->Update();
+	_monster->Update();
+	_camera->Update();
 }
 
 void Game::Render()
@@ -32,7 +42,7 @@ void Game::Render()
 	_graphics->RenderBegin();
 
 	{
-		_gameObject->Render(_pipeline);
+		_monster->Render(_pipeline);
 	}
 
 	/* 랜더링 끝, 화면에 출력 */

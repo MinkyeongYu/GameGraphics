@@ -1,2 +1,49 @@
-﻿  GameObject.cpp
+﻿  pch.cpp
+C:\Users\user\Desktop\GameGraphics\GameGraphics\pch.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\GameGraphics\GameGraphics\GameObject.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Transform.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Camera.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  BlendState.cpp
+  Camera.cpp
+  Component.cpp
+  ConstantBuffer.cpp
+  Game.cpp
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Game.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Game.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  GameGraphics.cpp
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Game.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  GameObject.cpp
+C:\Users\user\Desktop\GameGraphics\GameGraphics\GameObject.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  Geometry.cpp
+  GeometryHelper.cpp
+  Graphics.cpp
+  IndexBuffer.cpp
+  InputLayout.cpp
+  MonoBehaviour.cpp
+  Pipeline.cpp
+  RasterizerState.cpp
+  SamplerState.cpp
+  Shader.cpp
+  SimpleMath.cpp
+  Texture.cpp
+  Transform.cpp
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Transform.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Transform.cpp(126,23): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Transform.cpp(131,40): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\GameGraphics\GameGraphics\Transform.cpp(136,23): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  VertexBuffer.cpp
+  VertexData.cpp
+  코드를 생성하고 있습니다...
+DirectXTex_debug.lib(DirectXTexImage.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexImage.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(DirectXTexWIC.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexWIC.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(DirectXTexD3D11.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexD3D11.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(DirectXTexUtil.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexUtil.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(DirectXTexConvert.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexConvert.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(DirectXTexMipMaps.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexMipMaps.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(DirectXTexCompress.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexCompress.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(BC.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(BC.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(BC4BC5.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(BC4BC5.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+DirectXTex_debug.lib(BC6HBC7.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(BC6HBC7.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
   GameGraphics.vcxproj -> C:\Users\user\Desktop\GameGraphics\x64\Debug\GameGraphics.exe

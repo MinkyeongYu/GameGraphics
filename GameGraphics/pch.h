@@ -1,4 +1,4 @@
-// GameGrphics ÇÁ·ÎÁ§Æ®¿¡ ÇÊ¿äÇÑ, ÀÚÁÖ ¾²ÀÌ´Â ÆÄÀÏ ¸ğµÎ ¼ÒÀ¯
+// GameGrphics í”„ë¡œì íŠ¸ì— í•„ìš”í•œ, ìì£¼ ì“°ì´ëŠ” íŒŒì¼ ëª¨ë‘ ì†Œìœ 
 #pragma once
 
 /* Custom Files */
@@ -10,6 +10,7 @@
 
 /* STL */
 #include <unordered_map>
+#include <array>
 #include <memory>
 #include <vector>
 #include <list>
@@ -62,3 +63,5 @@ using namespace Microsoft::WRL;
 #include "Pipeline.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "MonoBehaviour.h"
+#include "Camera.h"

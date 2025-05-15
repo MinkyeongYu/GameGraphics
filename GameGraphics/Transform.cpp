@@ -2,6 +2,7 @@
 #include "Transform.h"
 
 Transform::Transform()
+	: Super(ComponentType::Transform)
 {
 
 }
@@ -11,7 +12,7 @@ Transform::~Transform()
 
 }
 
-void Transform::Init()
+void Transform::Awake()
 {
 
 }
@@ -51,11 +52,7 @@ void Transform::UpdateTransform()
 
 	_rotation = QuaternionToEulerAngles(quaternion);
 
-	// vector 방향만, 위치 필요하면 transformcoord
-	_right = Vec3::TransformNormal(Vec3::Right, _worldMatrix);
-	_up = Vec3::TransformNormal(Vec3::Up, _worldMatrix);
-	// library에 forward, backward 반대로 되어있음
-	_look = Vec3::TransformNormal(Vec3::Backward, _worldMatrix);
+	// vector 방향만(TransformNormal), 위치 필요하면 TransformCoord
 
 	// children에서도 함수 재귀적 호출
 	for (const std::shared_ptr<Transform>& child : _children)
